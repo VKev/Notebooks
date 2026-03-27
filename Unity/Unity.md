@@ -188,3 +188,8 @@ created: {{date:YYYY-MM-DD}}
 5. Add the child note links into the father note under `## Notes`.
 6. Add direct links from the child note to related notes.
 7. Add the father note link into `Unity.md`.
+
+## Topic areas
+- [[Bất đồng bộ]]: asynchronous flow, coroutine, task, awaitable, threads, và continuation behavior.
+- [[DOTS ECS]]: data-oriented architecture, entities, systems, baking, archetypes/chunks, và Job System.
+- [[Draw Call]]: draw call mental model, batching, instancing, `SRP Batcher`, và workflow tối ưu render CPU overhead.

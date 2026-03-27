@@ -106,6 +106,18 @@ Examples:
 - `Unity/Bất đồng bộ/Bất đồng bộ.md` is the father note for this folder.
 - `Coroutine.md` is a child permanent note and is the best current example of a finished concept note.
 
+### `/Unity/DOTS ECS/`
+
+- Topic folder for Unity DOTS, ECS, baking, and Job System concepts.
+- `Unity/DOTS ECS/DOTS ECS.md` is the father note for this folder.
+- `Definition.md` and `Comparison.md` act as the orientation notes for the topic.
+
+### `/Unity/Draw Call/`
+
+- Topic folder for Unity draw call mental models and render-overhead optimization.
+- `Unity/Draw Call/Draw Call.md` is the father note for this folder.
+- `Definition.md` and `Comparison.md` act as the orientation notes for the topic.
+
 ## How To Read The Vault Correctly
 
 - First identify which root field folder you are working in.

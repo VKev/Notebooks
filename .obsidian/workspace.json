@@ -6,7 +6,6 @@
       {
         "id": "a8c2890e328df2d5",
         "type": "tabs",
-        "dimension": 57.22049689440993,
         "children": [
           {
             "id": "f0264680901211b5",
@@ -14,29 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Unity/Bất đồng bộ/Definition.md",
+                "file": "Unity/Draw Call/Optimization.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Definition"
-            }
-          }
-        ]
-      },
-      {
-        "id": "172cc1b4ecec56e4",
-        "type": "tabs",
-        "dimension": 42.77950310559006,
-        "children": [
-          {
-            "id": "e47f36721fe8e587",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "title": "Optimization"
             }
           }
         ]
@@ -107,7 +89,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 204.5
+    "width": 238.5
   },
   "right": {
     "id": "3d35cb928bbbabef",
@@ -211,43 +193,44 @@
       "bases:Create new base": false
     }
   },
-  "active": "33a9e7bb361b69ad",
+  "active": "f0264680901211b5",
   "lastOpenFiles": [
+    "Unity/Draw Call/Batching.md",
+    "Unity/Draw Call/Optimization.md",
+    "Unity/Draw Call/Definition.md",
+    "Unity/Draw Call/Comparison.md",
+    "Unity/Draw Call/SRP Batcher.md",
+    "Unity/Draw Call/GPU Instancing.md",
+    "Unity/Draw Call/Draw Call.md",
+    "Unity/DOTS ECS/Entity.md",
+    "Unity/Draw Call",
+    "Unity/DOTS ECS/Baking.md",
+    "Unity/DOTS ECS/Job System.md",
+    "Unity/DOTS ECS/Definition.md",
+    "Unity/DOTS ECS/DOTS ECS.md",
     "Unity/Bất đồng bộ/Comparison.md",
-    "Unity/Bất đồng bộ/Definition.md",
-    "Unity/Bất đồng bộ/Job System.md",
-    "Unity/Bất đồng bộ/Main Thread.md",
-    "Unity/Bất đồng bộ/Thread.md",
+    "Unity/DOTS ECS/Comparison.md",
+    "Unity/Bất đồng bộ/Bất đồng bộ.md",
     "Unity/Bất đồng bộ/Async Await.md",
+    "Unity/DOTS ECS/Archetypes and Chunks.md",
+    "Unity/DOTS ECS/World.md",
+    "Unity/DOTS ECS/Systems.md",
+    "Unity/DOTS ECS/Components.md",
+    "Unity/DOTS ECS",
+    "Unity/Bất đồng bộ/Awaitable.md",
+    "Unity/Bất đồng bộ/Coroutine.md",
+    "Unity/Bất đồng bộ/Job System.md",
     "Unity/Bất đồng bộ/UnitySynchronizationContext.md",
     "Unity/Bất đồng bộ/Task.md",
     "Unity/Bất đồng bộ/ThreadPool.md",
-    "Unity/Bất đồng bộ/Awaitable.md",
-    "Unity/Bất đồng bộ/Coroutine.md",
-    "Unity/Bất đồng bộ/Coroutine vs Async Await.md",
-    "Unity/Bất đồng bộ/Async Await in CSharp.md",
-    "Unity/Bất đồng bộ/Asynchronous Programming.md",
-    "Readme.md",
-    "Agents.md",
-    "README.md",
-    "AGENTS.md",
-    "Unity/Unity.md",
-    "Unity/Bất đồng bộ/Bất đồng bộ.md",
     "Tags",
-    "Unity/Inbox.hide/Inbox.hide.md",
     "Unity/Inbox.hide",
-    "Unity/Templates.hide/Templates.hide.md",
-    "Unity/Templates.hide/Structure Note Template.hide.md",
-    "Unity/Templates.hide/Permanent Note Template.hide.md",
-    "Unity/Templates.hide/Fleeting Note Template.hide.md",
     "Unity/Templates.hide",
-    "Unity/Templates/Structure Note Template.hide.md",
     "Unity/Templates",
     "Unity/Inbox",
     "Unity/Bất đồng bộ",
     "Unity",
     "Untitled.canvas",
-    "Untitled.base",
-    "Unity/Bất đồng bộ/Untitled.base"
+    "Untitled.base"
   ]
 }

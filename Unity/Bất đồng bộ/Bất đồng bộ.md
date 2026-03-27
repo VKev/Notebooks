@@ -20,8 +20,8 @@ tags:
 - [[Coroutine]]: tạm dừng và tiếp tục logic theo frame, thời gian, hoặc điều kiện.
 - [[Async Await|Async/Await]]: model `Task` của C# với `async`, `await`, `Task<T>`, và các pitfall chính.
 - [[Awaitable]]: bridge của Unity để dùng cú pháp `await` với frame, time, và `AsyncOperation`.
-- [[Job System]]: compute scheduler native của Unity cho multithreaded data-oriented work.
-- [[Comparison]]: cách chọn giữa `Coroutine`, `Task`, `Awaitable`, background thread work, và Job System.
+- [[Comparison]]: cách chọn giữa `Coroutine`, `Task`, `Awaitable`, background thread work, và các mô hình liên quan.
 
 ## Related structure notes
 - [[Unity]]: quy luật note cho Unity field.
+- [[DOTS ECS]]: topic data-oriented về Entities, baking, và Job System.

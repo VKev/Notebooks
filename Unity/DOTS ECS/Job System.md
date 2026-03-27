@@ -56,10 +56,9 @@ handle.Complete();
 ```
 
 ## Related notes
-- [[Bất đồng bộ]]
+- [[DOTS ECS]]
 - [[Definition]]
-- [[Thread]]
-- [[Main Thread]]
-- [[ThreadPool]]
-- [[Awaitable]]
+- [[Systems]]
+- [[Baking]]
 - [[Comparison]]
+- [[Bất đồng bộ]]
