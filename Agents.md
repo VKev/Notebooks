@@ -118,6 +118,102 @@ Examples:
 - Use links as the primary structure. Do not try to organize the vault mainly with tags.
 - A deeper folder-specific rule note can narrow the field rules, but the field rules still apply unless clearly contradicted.
 
+## How To Handle Raw Information
+
+- When the user provides raw information, do not dump it directly into one note.
+- First convert the raw input into structured knowledge that fits the field rules and folder structure.
+- Use this pipeline:
+  - `Filter`
+  - `Classify`
+  - `Group`
+  - `Extract`
+  - `Compress`
+
+### Filter
+
+- Keep only information that is relevant to the user's current objective.
+- Remove duplicates, noise, filler, and low-value repetition.
+- Normalize obvious metadata when available:
+  - source
+  - date
+  - author
+  - topic
+  - document type
+
+### Classify
+
+- If the field already has clear categories, father-note patterns, or topic folders, classify the raw information into those existing buckets first.
+- Prefer existing field taxonomy over inventing new labels.
+- Example in `Unity/`: map content into the correct topic folder before writing notes.
+
+### Group
+
+- If the information does not fit an existing structure cleanly, group it by natural themes before writing notes.
+- Split mixed raw input into separate concepts, claims, comparisons, workflows, or examples.
+- If one chunk answers "what it is", it likely belongs in `Definition.md`.
+- If one chunk mainly contrasts options, trade-offs, or choices, it likely belongs in `Comparison.md`.
+- If one chunk is a standalone concept, make it its own permanent note.
+
+### Extract
+
+- Pull important information out of paragraph form into reusable knowledge units.
+- Extract, when present:
+  - core concept
+  - claims
+  - actions
+  - outcomes
+  - entities
+  - dates
+  - sources
+  - important terms and key phrases
+- For high-accuracy content, prefer extractive capture first, then rewrite in your own words second.
+- Preserve uncertainty instead of over-claiming when the raw input is ambiguous.
+
+### Compress
+
+- Only after filtering and extraction, rewrite for readability.
+- Put the most important conclusion first.
+- Use short sections, short bullets, and plain language.
+- Prefer 3 to 5 strong buckets over long undifferentiated lists.
+- Use progressive disclosure: main point first, supporting detail after.
+
+## Output Model For Raw Information
+
+- When converting raw information into notes, aim for two layers:
+  - machine-readable structure
+  - human-readable explanation
+
+### Machine-readable structure
+
+- Preserve or infer, when useful:
+  - topic
+  - category
+  - key entities
+  - key phrases
+  - source
+  - date
+  - importance
+  - confidence
+
+### Human-readable structure
+
+- Prefer this shape:
+  - one-sentence conclusion first
+  - 3 to 5 main points
+  - for each point: main idea, why it matters, supporting detail
+
+## How To Turn Raw Information Into Vault Notes
+
+1. Identify the root field and read its rule note.
+2. Filter the raw input to the user's actual goal.
+3. Classify into an existing folder if possible.
+4. Group mixed content into separate note-sized units.
+5. Extract facts, claims, examples, and terminology before rewriting.
+6. Create or update the smallest set of notes that preserves clarity.
+7. Use `Definition.md` for core meaning and `Comparison.md` for compare/contrast content when the field rules allow it.
+8. Prefer multiple linked permanent notes over one overloaded summary note.
+9. Update the father note index and related links after writing.
+
 ## How To Add A New Child Note
 
 1. Identify the root field.
@@ -126,9 +222,10 @@ Examples:
 4. Use the field's permanent note template.
 5. Create the file directly inside the target topic folder.
 6. Use an English filename that names one concept or one strong claim.
-7. Keep headings in English and write the body mainly in Vietnamese.
-8. Add links to the father note and related notes.
-9. Update the father note under `## Notes` with a short description.
+7. Add `created: YYYY-MM-DD` in frontmatter for the permanent note.
+8. Keep headings in English and write the body mainly in Vietnamese.
+9. Add links to the father note and related notes.
+10. Update the father note under `## Notes` with a short description.
 
 ## How To Add A New Topic Folder
 
@@ -165,6 +262,10 @@ Examples:
 - Use UTF-8 when reading or writing notes because the vault contains Vietnamese text and folder names.
 - Always determine the current root field before editing notes.
 - Entering a field means reading that field's same-name rule note first.
+- Permanent notes should include a `created` field in frontmatter using `YYYY-MM-DD`.
+- If you touch an older permanent note that is missing `created`, add it when the correct date is reasonably known.
+- When the user gives raw material, restructure it into note-sized knowledge units instead of preserving the source shape by default.
+- Prefer extract-first, rewrite-second for high-accuracy material.
 - Do not rename a father note without renaming its folder to match.
 - Do not create separate table-of-content files when the father note already covers that role.
 - Do not add knowledge notes inside `.hide` folders.

@@ -43,6 +43,9 @@ tags:
 
 ## Child note naming rules
 - One child note should cover one main concept or one strong claim.
+- Each topic folder may reserve these canonical child note names:
+  - `Definition.md`: the folder's core definition and mental model note
+  - `Comparison.md`: the folder's comparison note for deciding between related concepts in that folder
 - Prefer a sharp concept handle when the note is about a thing:
   - `Coroutine`
   - `ScriptableObject`
@@ -50,6 +53,7 @@ tags:
 - If the note is about a claim, rule, or comparison, prefer a complete phrase:
   - `Coroutines do not create real parallelism`
   - `Update is not a scheduler`
+- `Definition.md` and `Comparison.md` are explicit exceptions to the "prefer specific names" rule because they play fixed roles inside a topic folder.
 - Keep child note names short, specific, and unique.
 - Avoid vague names such as `Basics`, `Overview`, `Notes`, `Misc`, `Part 1`, or `More`.
 - Keep acronyms only when they are already the common term, such as `ECS` or `GC`.
@@ -61,6 +65,12 @@ tags:
 - Technical terms, API names, class names, code identifiers, and important phrases should stay in English.
 - Full dual-language writing is not required.
 - Add English only when it improves clarity, searchability, or naming consistency.
+
+## Child note frontmatter rules
+- Permanent notes should include `note_type: permanent`.
+- Permanent notes should include `created: YYYY-MM-DD`.
+- Add `aliases` when alternate English or Vietnamese discovery would help.
+- Keep frontmatter stable and minimal; do not add noisy metadata unless it serves retrieval or workflow.
 
 ## Zettelkasten rules in this vault
 - Treat each child note as a `permanent note`:
@@ -166,8 +176,8 @@ created: {{date:YYYY-MM-DD}}
 ## Folder checklist for new topic notes
 1. Create the folder.
 2. Create the father note with the same name as the folder.
-3. Create child notes directly inside that folder with English file names.
-4. Add the child note links into the father note under `## Notes`.
-5. Add direct links from the child note to related notes.
-6. Add the father note link into `Unity.md`.
-
+3. If needed, create `Definition.md` for the topic definition and `Comparison.md` for topic comparisons.
+4. Create other child notes directly inside that folder with English file names.
+5. Add the child note links into the father note under `## Notes`.
+6. Add direct links from the child note to related notes.
+7. Add the father note link into `Unity.md`.

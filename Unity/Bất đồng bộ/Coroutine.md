@@ -3,6 +3,7 @@ aliases:
   - Unity Coroutine
   - Coroutine trong Unity
 note_type: permanent
+created: 2026-03-27
 tags:
   - unity
 ---
@@ -68,3 +69,6 @@ public class Spawner : MonoBehaviour
 
 ## Related notes
 - [[Bất đồng bộ]]
+- [[Definition]]
+- [[Awaitable]]
+- [[Comparison]]
