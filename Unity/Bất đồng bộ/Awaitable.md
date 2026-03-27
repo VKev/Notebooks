@@ -38,6 +38,7 @@ tags:
 - Hợp khi bạn muốn syntax `async/await` nhưng flow vẫn gắn chặt với `game loop`.
 - Hợp cho `scene loading`, `wait next frame`, `wait seconds`, `UI flow`, hoặc các coroutine đơn giản muốn viết sạch hơn.
 - Hợp khi bạn cần chuyển sang `background thread` để xử lý nặng rồi chuyển về `main thread`.
+- Hợp hơn Job System khi bạn đang xử lý I/O, long-running background work, hoặc chờ nhiều loại async primitive khác nhau.
 
 ## Benefits
 - Cú pháp gọn hơn nhiều coroutine dài.
@@ -50,6 +51,7 @@ tags:
 - Vẫn phải tự quản lý chuyện hủy flow, object bị destroy, và thời điểm resume.
 - `Awaitable` instance được pool để giảm allocation, nên không an toàn nếu `await` nhiều lần trên cùng một instance.
 - Nếu bạn cần `WaitAll`, `WaitAny`, hoặc nhiều consumer cùng chờ một kết quả, `Task` vẫn tự nhiên hơn.
+- Nó không phải lựa chọn tốt nhất để parallelize các thuật toán compute ngắn; trường hợp đó Job System phù hợp hơn.
 - Nếu project không dùng phiên bản Unity có hỗ trợ `Awaitable`, pattern này sẽ không khả dụng.
 
 ## Common mistakes
@@ -80,6 +82,10 @@ public class AwaitableExample : MonoBehaviour
 ## Related notes
 - [[Bất đồng bộ]]
 - [[Definition]]
+- [[Main Thread]]
+- [[ThreadPool]]
+- [[UnitySynchronizationContext]]
 - [[Coroutine]]
 - [[Async Await]]
+- [[Job System]]
 - [[Comparison]]

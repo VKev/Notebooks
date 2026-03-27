@@ -3,6 +3,7 @@ aliases:
   - Comparison
   - Coroutine vs Async/Await
   - Coroutine vs Async Await
+  - Coroutine vs Task vs Awaitable vs Jobs
   - Khi nào dùng Coroutine hay Async
 note_type: permanent
 created: 2026-03-27
@@ -11,68 +12,90 @@ tags:
 ---
 
 ## One-line answer
-- `Coroutine` là frame-based async của Unity, còn `async/await` là task-based async của C#; chọn đúng công cụ phụ thuộc vào thứ bạn đang chờ và nơi code được phép resume.
+- `Coroutine`, `Task`, `Awaitable`, `ThreadPool` work, và `Job System` là các execution model khác nhau; muốn chọn đúng thì phải hỏi cái gì đang được schedule, chạy ở đâu, và resume về đâu.
 
 ## Problem
-- Cả hai đều trông giống "đợi rồi làm tiếp", nên rất dễ bị dùng thay thế lẫn nhau một cách máy móc.
-- Nếu chọn sai model, code sẽ khó debug, không khớp lifecycle, hoặc đụng phải giới hạn `main thread`.
+- Nhiều API đều trông như "làm việc sau" hoặc "đợi rồi làm tiếp", nên rất dễ bị gom chung thành một nhóm mơ hồ gọi là async.
+- Nếu chọn sai model, bạn sẽ gặp `main thread` stall, extra latency, race condition, hoặc code khó maintain.
 
 ## Core idea
-- Hãy phân loại theo waiting model:
-  - `Coroutine`: chờ theo `frame`, `time`, hoặc condition của game loop
-  - `async/await`: chờ theo `task completion`
-  - `Awaitable`: cầu nối Unity-friendly giữa hai phía
-- Đây không phải ba tên gọi khác nhau của cùng một thứ; chúng phục vụ các kiểu flow khác nhau.
+- Hãy phân loại theo loại scheduling:
+  - `Coroutine`: sequencing theo `frame/time` trên `main thread`
+  - `Task`: async continuation model của .NET
+  - `Awaitable`: Unity-aware async model
+  - `ThreadPool` hoặc `Task.Run`: background execution cho pure C# work
+  - `Job System`: multithreaded compute model của Unity
+- Chúng không phải tên khác nhau của cùng một cơ chế.
 
 ## Mechanism
 - So sánh ngắn theo tiêu chí thực tế:
-  - `Thread`: coroutine chạy trên `main thread`; `Task` trong Unity thường resume lại ở `main thread` nếu được await từ `main thread`, nhưng từ background thì continuation có thể ở `ThreadPool`; `Awaitable` cho phép switch thread rõ hơn theo API Unity
-  - `Timing`: coroutine bám theo frame; `async/await` bám theo lúc task xong; `Awaitable` cho phép chờ frame/time bằng cú pháp `await`
-  - `Return value`: coroutine không tự nhiên với giá trị trả về; `Task<T>` mạnh hơn nhiều
-  - `Cancellation`: coroutine stop được nhưng không thống nhất; `CancellationToken` của task rõ hơn
-  - `Error handling`: `try/catch` trong async tự nhiên hơn; coroutine debug lỗi thường kém rõ ràng hơn
-  - `Multi-await`: `Task` an toàn hơn khi cần nhiều consumer hoặc await nhiều lần; `Awaitable` không an toàn cho kiểu dùng đó vì object được pool
+  - `Coroutine`: scheduler là Unity player loop; chạy trên `main thread`; hợp cho frame-timed sequence
+  - `Task`: scheduler là CLR async/task world; trong Unity, continuation từ `main thread` thường quay lại `UnitySynchronizationContext` ở `next Update`
+  - `Awaitable`: continuation-aware kiểu Unity; main thread gọi thì resume main thread, background gọi thì resume `ThreadPool`; có API switch thread/frame rõ ràng
+  - `ThreadPool` hoặc `Task.Run`: code thật sự chạy ở CLR background worker; không được chạm phần lớn Unity API
+  - `Job System`: job được schedule từ `main thread`, chạy trên Unity worker threads, đồng bộ bằng `JobHandle` và `NativeContainer`
+  - `Return value`: `Task<T>` và `Awaitable<T>` tự nhiên hơn coroutine; jobs trả kết quả qua data container
+  - `Multi-await`: `Task` hợp hơn `Awaitable` khi cần nhiều consumer hoặc await nhiều lần
 
 ## When to use
 - Dùng `Coroutine` khi:
   - flow là `gameplay timing`, `spawn loop`, `cooldown`, `animation sequence`
-- Dùng `async/await` khi:
+- Dùng `Task` hoặc `async/await` khi:
   - flow là `HTTP`, `file`, `database`, hoặc task dài không phụ thuộc frame
 - Dùng `Awaitable` khi:
   - bạn muốn syntax async nhưng vẫn chờ theo `next frame`, `seconds`, `scene loading`, hoặc cần bridge giữa `background thread` và `main thread`
+- Dùng `ThreadPool` hoặc `Task.Run` khi:
+  - bạn có pure C# CPU work không phù hợp với Job System
+- Dùng `Job System` khi:
+  - bạn có short-lived, data-oriented, CPU-heavy compute và muốn scale qua nhiều core
 
 ## Benefits
 - Chọn đúng model làm code rõ hơn, lifecycle sạch hơn, và bug ít hơn.
-- Team cũng dễ đọc được ý định: đây là flow gameplay, flow task, hay flow Unity async bridge.
+- Team dễ nhìn vào abstraction để biết đây là wait-style async, frame sequencing, background work, hay parallel compute.
 
 ## Trade-offs / Limits
 - Không nên ép toàn bộ project dùng một model duy nhất.
-- Mix cả ba bừa bãi làm ownership của flow mơ hồ, nhất là khi object bị disable hoặc destroy.
-- `async/await` mạnh hơn về task composition, nhưng không tự thay thế flow frame-based của Unity.
-- `Awaitable` có lợi thế Unity-specific, nhưng không phải bản sao một-một của `Task`.
+- Mix bừa `Coroutine`, `Task`, `Awaitable`, `ThreadPool`, và `Job System` làm ownership của flow mơ hồ.
+- `Task` mạnh về composition nhưng không tự thay thế frame-based flow.
+- `Awaitable` Unity-friendly hơn nhưng không phải bản sao một-một của `Task`.
+- `Job System` rất mạnh cho compute, nhưng không phải model cho I/O hoặc arbitrary managed object workflow.
 
 ## Common mistakes
 - Dùng coroutine cho `HTTP` hoặc `file I/O` chỉ vì đang quen tay với Unity.
 - Dùng `Task.Run(...)` cho logic có đụng `Unity API`.
+- Dùng `.Wait()` hoặc `.Result` trên `main thread`.
 - Cố rewrite toàn bộ coroutine sang async mà không xét xem flow đó vốn đang gắn với frame hay không.
+- Dùng Job System cho bài toán vốn chỉ là chờ network hoặc chờ file xong.
 
 ## Example
 - Một mental shortcut hữu ích:
 
 ```csharp
-// frame-based
+// frame-based sequencing
 yield return null;
 
-// task-based
+// task-based async
 await someTask;
 
 // Unity-friendly async
 await Awaitable.NextFrameAsync();
+
+// background C# work
+await Task.Run(ComputeSomething);
+
+// data-oriented parallel compute
+JobHandle handle = job.Schedule();
 ```
 
 ## Related notes
 - [[Bất đồng bộ]]
 - [[Definition]]
+- [[Thread]]
+- [[Main Thread]]
+- [[ThreadPool]]
+- [[Task]]
+- [[UnitySynchronizationContext]]
 - [[Coroutine]]
 - [[Async Await]]
 - [[Awaitable]]
+- [[Job System]]

@@ -70,5 +70,6 @@ public class Spawner : MonoBehaviour
 ## Related notes
 - [[Bất đồng bộ]]
 - [[Definition]]
+- [[Main Thread]]
 - [[Awaitable]]
 - [[Comparison]]

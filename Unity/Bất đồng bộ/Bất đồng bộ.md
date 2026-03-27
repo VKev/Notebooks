@@ -11,11 +11,17 @@ tags:
 - Father note này đóng vai trò `structure note` cho toàn bộ folder.
 
 ## Notes
-- [[Definition]]: khái niệm chung của bất đồng bộ và mental model "wait without blocking".
+- [[Definition]]: mental model tổng quát của async trong Unity và các execution layers liên quan.
+- [[Thread]]: thread là execution lane thật sự được OS schedule, không phải chỉ là `Task`.
+- [[Main Thread]]: thread scripting chính của Unity và quy tắc main-thread-only của engine API.
+- [[ThreadPool]]: pool các CLR background worker mà `Task` và `Awaitable.BackgroundThreadAsync()` dùng.
+- [[Task]]: abstraction của .NET cho async work và continuation, không phải thread.
+- [[UnitySynchronizationContext]]: cách Unity đưa normal `Task` continuation về `main thread`.
 - [[Coroutine]]: tạm dừng và tiếp tục logic theo frame, thời gian, hoặc điều kiện.
 - [[Async Await|Async/Await]]: model `Task` của C# với `async`, `await`, `Task<T>`, và các pitfall chính.
-- [[Comparison]]: cách chọn đúng model theo frame-based hay task-based waiting.
 - [[Awaitable]]: bridge của Unity để dùng cú pháp `await` với frame, time, và `AsyncOperation`.
+- [[Job System]]: compute scheduler native của Unity cho multithreaded data-oriented work.
+- [[Comparison]]: cách chọn giữa `Coroutine`, `Task`, `Awaitable`, background thread work, và Job System.
 
 ## Related structure notes
 - [[Unity]]: quy luật note cho Unity field.

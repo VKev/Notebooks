@@ -29,6 +29,7 @@ tags:
 - Compiler generate `state machine` để lưu trạng thái local variable, vị trí đang dừng, và điểm cần resume.
 - Muốn chuyển việc nặng sang `background thread`, bạn vẫn cần API phù hợp như `Task.Run(...)`.
 - Trong Unity, nếu bạn gọi một `Task` từ `main thread`, continuation thường quay lại `UnitySynchronizationContext` và resume ở `Update` tick kế tiếp của `main thread`.
+- Nếu async flow bắt đầu từ background thread, continuation có thể tiếp tục ở `ThreadPool` thay vì tự quay về `main thread`.
 
 ## When to use
 - Hợp cho `HTTP request`, `file I/O`, `database`, hoặc task dài mà kết quả được báo bằng `Task`.
@@ -51,6 +52,7 @@ tags:
 - Dùng `Task.Delay(...).Wait()` hoặc `.Result`, vô tình block thread.
 - Đụng `UnityEngine` API bên trong `Task.Run(...)`.
 - Dùng quá nhiều `fire-and-forget` mà không quản lý lỗi và hủy.
+- Quên rằng `Task` là abstraction của work và continuation, không phải thread.
 
 ## Example
 - Ví dụ đơn giản của task-based async trong C#.
@@ -75,6 +77,10 @@ public class Loader : MonoBehaviour
 ## Related notes
 - [[Bất đồng bộ]]
 - [[Definition]]
+- [[Task]]
+- [[ThreadPool]]
+- [[Main Thread]]
+- [[UnitySynchronizationContext]]
 - [[Coroutine]]
 - [[Awaitable]]
 - [[Comparison]]
