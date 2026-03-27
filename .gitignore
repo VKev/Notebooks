@@ -3,8 +3,7 @@
 .makemd/
 **/.space/context.mdb
 
-# Local Obsidian workspace state
-.obsidian/workspace*.json
+# Local Obsidian cache
 .obsidian/cache/
 
 # OS noise

@@ -9,6 +9,7 @@ note_type: permanent
 created: 2026-03-27
 tags:
   - unity
+color: var(--mk-color-base-40)
 ---
 
 ## One-line answer

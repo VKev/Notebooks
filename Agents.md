@@ -50,7 +50,7 @@ Examples:
 - Obsidian app, theme, plugin, and UI configuration.
 - Treat this as tooling config, not learning content.
 - Read it when you need setup context such as enabled plugins, theme, or hidden-file behavior.
-- Avoid relying on `workspace*.json`; it is local layout state and is ignored in git.
+- `workspace*.json` is view/layout state; it may be tracked in git when the vault owner wants pulled repos to open with the same layout, but it is still not knowledge content.
 
 ### `/.space/`
 
@@ -227,6 +227,15 @@ Examples:
 9. Add links to the father note and related notes.
 10. Update the father note under `## Notes` with a short description.
 
+## Color Rules
+
+- Treat `color` frontmatter as a visual workflow cue, not as the primary structure of the vault.
+- Preserve an existing `color` value when editing a note unless the user asks to change the color system.
+- In the Unity field, `Definition.md` and `Comparison.md` may use a shared `color` value to mark them as canonical orientation notes for the folder.
+- The current shared Unity value is `var(--mk-color-base-40)`.
+- If you create a new `Definition.md` or `Comparison.md` in Unity and the folder already uses a shared color convention for those notes, follow that convention.
+- Do not add `color` to ordinary permanent notes by default unless the field rules or the user explicitly ask for it.
+
 ## How To Add A New Topic Folder
 
 1. Choose the correct root field folder.
@@ -279,6 +288,6 @@ Examples:
   - `.trash/`
   - `.makemd/`
   - `**/.space/context.mdb`
-  - `.obsidian/workspace*.json`
+- Obsidian workspace layout files can be tracked when the owner wants the pulled vault view to match their own.
 
 When uncertain, follow the nearest father note and existing templates instead of inventing a new note schema.

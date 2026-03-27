@@ -72,6 +72,13 @@ tags:
 - Add `aliases` when alternate English or Vietnamese discovery would help.
 - Keep frontmatter stable and minimal; do not add noisy metadata unless it serves retrieval or workflow.
 
+## Child note color rules
+- `color` is optional frontmatter and should be used as a visual workflow marker, not as the main organization system.
+- `Definition.md` and `Comparison.md` may share the same `color` to mark them as the canonical orientation notes inside a topic folder.
+- Current shared value for that pair in this field: `var(--mk-color-base-40)`.
+- If a topic folder already uses a shared color for `Definition.md` and `Comparison.md`, preserve that color when editing those notes.
+- Do not add `color` to normal permanent notes by default unless the user wants a broader color system.
+
 ## Zettelkasten rules in this vault
 - Treat each child note as a `permanent note`:
   - self-contained
