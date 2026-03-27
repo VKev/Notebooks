@@ -1,24 +1,40 @@
 {
   "main": {
-    "id": "57b3f992c8295a4b",
+    "id": "1405d878db8ebbb7",
     "type": "split",
     "children": [
       {
-        "id": "a8c2890e328df2d5",
+        "id": "c88df6a3af076d33",
         "type": "tabs",
         "children": [
           {
-            "id": "f0264680901211b5",
+            "id": "e7d62fbd0e39d8e7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Unity/Draw Call/Optimization.md",
+                "file": "Unity/Asynchronous/Coroutine.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Optimization"
+              "title": "Coroutine"
+            }
+          }
+        ]
+      },
+      {
+        "id": "5490f0a63fff9849",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e43d83ed767bf7b2",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -27,15 +43,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "d8769c6982be904e",
+    "id": "cfbd0710e72019aa",
     "type": "split",
     "children": [
       {
-        "id": "083785af79dc96f3",
+        "id": "3da35a0e177b72df",
         "type": "tabs",
         "children": [
           {
-            "id": "41fe5428ab731af6",
+            "id": "c058b3669475dd2a",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,7 +64,7 @@
             }
           },
           {
-            "id": "a723748d6f1537df",
+            "id": "f494aa1383f69307",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -65,7 +81,7 @@
             }
           },
           {
-            "id": "682500cc1886d0c1",
+            "id": "567a0fe9805d8bee",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -75,7 +91,7 @@
             }
           },
           {
-            "id": "33a9e7bb361b69ad",
+            "id": "6c122adb29a0a45e",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -89,22 +105,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5
+    "width": 300
   },
   "right": {
-    "id": "3d35cb928bbbabef",
+    "id": "47d712d9b95b28f7",
     "type": "split",
     "children": [
       {
-        "id": "f2863311a6e14270",
+        "id": "cf85de8310e62ad5",
         "type": "tabs",
         "children": [
           {
-            "id": "7c3907d8b3d19cdf",
+            "id": "292e1f54086cbf41",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Unity/Asynchronous/Coroutine.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,16 +131,16 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for Coroutine"
             }
           },
           {
-            "id": "10f5431dc6d7d80e",
+            "id": "809ca0e3e576b473",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Unity/Bất đồng bộ/Coroutine.md",
+                "file": "Unity/Asynchronous/Coroutine.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -132,7 +149,7 @@
             }
           },
           {
-            "id": "9b561a7e09ae01fe",
+            "id": "ae859e6ccf22f2c4",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -147,7 +164,7 @@
             }
           },
           {
-            "id": "303b3b2c448b9076",
+            "id": "d2108cec0365f65b",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -161,12 +178,12 @@
             }
           },
           {
-            "id": "efb56f2c6a8c5ee8",
+            "id": "44eee733c0168faf",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Unity/Bất đồng bộ/Coroutine.md",
+                "file": "Unity/Asynchronous/Coroutine.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -184,53 +201,35 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "graph:Open graph view": false,
       "switcher:Open quick switcher": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
+      "graph:Open graph view": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "markdown-importer:Open format converter": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "f0264680901211b5",
+  "active": "e7d62fbd0e39d8e7",
   "lastOpenFiles": [
-    "Unity/Draw Call/Batching.md",
-    "Unity/Draw Call/Optimization.md",
-    "Unity/Draw Call/Definition.md",
-    "Unity/Draw Call/Comparison.md",
-    "Unity/Draw Call/SRP Batcher.md",
-    "Unity/Draw Call/GPU Instancing.md",
-    "Unity/Draw Call/Draw Call.md",
-    "Unity/DOTS ECS/Entity.md",
-    "Unity/Draw Call",
-    "Unity/DOTS ECS/Baking.md",
-    "Unity/DOTS ECS/Job System.md",
-    "Unity/DOTS ECS/Definition.md",
-    "Unity/DOTS ECS/DOTS ECS.md",
-    "Unity/Bất đồng bộ/Comparison.md",
-    "Unity/DOTS ECS/Comparison.md",
-    "Unity/Bất đồng bộ/Bất đồng bộ.md",
-    "Unity/Bất đồng bộ/Async Await.md",
-    "Unity/DOTS ECS/Archetypes and Chunks.md",
-    "Unity/DOTS ECS/World.md",
-    "Unity/DOTS ECS/Systems.md",
-    "Unity/DOTS ECS/Components.md",
-    "Unity/DOTS ECS",
-    "Unity/Bất đồng bộ/Awaitable.md",
-    "Unity/Bất đồng bộ/Coroutine.md",
-    "Unity/Bất đồng bộ/Job System.md",
-    "Unity/Bất đồng bộ/UnitySynchronizationContext.md",
-    "Unity/Bất đồng bộ/Task.md",
-    "Unity/Bất đồng bộ/ThreadPool.md",
-    "Tags",
-    "Unity/Inbox.hide",
-    "Unity/Templates.hide",
-    "Unity/Templates",
-    "Unity/Inbox",
-    "Unity/Bất đồng bộ",
+    "Unity/Asynchronous/Definition.md",
+    "Unity/Asynchronous/Asynchronous.md",
+    "Unity/Unity.md",
+    "Unity/Asynchronous/Summary.md",
+    "Unity/Asynchronous/AwaitableCompletionSource.md",
+    "Unity/Asynchronous/AsyncOperation.md",
+    "Unity/Asynchronous/Awaitable.md",
+    "Unity/Asynchronous/AsyncAwait.md",
+    "Unity/Asynchronous/Coroutine.md",
+    "Readme.md",
+    "Agents.md",
+    "__agents_tmp__.md",
+    "Unity/Asynchronous",
+    "Unity/Table of content.md",
+    "AGENTS.md",
     "Unity",
-    "Untitled.canvas",
-    "Untitled.base"
+    "Tags"
   ]
 }

@@ -39,16 +39,15 @@
   "deleteFileOption": "trash",
   "expandedSpaces": [
     "/",
-    "//Unity"
+    "//Tags",
+    "//Unity",
+    "//Unity/Unity/Asynchronous"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
   "suppressedWarnings": [],
   "spaceSubFolder": ".space",
-  "hiddenFiles": [
-    "Unity/Templates",
-    "Unity/Inbox"
-  ],
+  "hiddenFiles": [],
   "hiddenExtensions": [
     ".mdb",
     "_assets",

@@ -1,6 +1,4 @@
 {
-  "theme": "obsidian",
-  "accentColor": "#c4c4c4",
-  "showViewHeader": true,
-  "cssTheme": "Minimal"
+  "cssTheme": "Minimal",
+  "theme": "obsidian"
 }
