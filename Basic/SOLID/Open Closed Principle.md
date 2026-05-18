@@ -17,15 +17,14 @@ tags:
 - Code sử dụng abstraction không cần biết có bao nhiêu implementation phía sau.
 
 ## Decision rules
-- Giảm rủi ro làm hỏng code cũ khi thêm tính năng mới.
-- Hỗ trợ mở rộng hệ thống theo hướng an toàn hơn.
-- Giúp pattern như `Strategy`, `Decorator`, `Factory` phát huy tác dụng.
 - Khi behavior có khả năng tăng dần theo loại, rule, hoặc kênh xử lý khác nhau.
 - Khi bạn muốn thêm feature mới mà ít chạm vào code cũ.
 - Tránh tạo abstraction từ đầu nếu chưa có dấu hiệu biến thiên thực sự.
-- Tránh thêm nhiều layer mở rộng cho bài toán rất nhỏ và ổn định.
-- Tạo abstraction quá sớm có thể gây over-engineering.
+- Tránh thêm nhiều layer mở rộng cho bài toán nhỏ và ổn định.
 - Không phải mọi chỗ đều cần “closed for modification”; có nơi sửa trực tiếp lại đơn giản và đúng hơn.
+- Giảm rủi ro làm hỏng code cũ khi thêm tính năng mới.
+- Hỗ trợ mở rộng hệ thống theo hướng an toàn hơn.
+- Giúp pattern như `Strategy`, `Decorator`, `Factory` phát huy tác dụng.
 
 ## Example
 ```csharp

@@ -8,31 +8,24 @@ sticker: lucide//align-justify
 ---
 
 ## Core idea
-- `Execution Order` là thứ tự cố định mà Unity gọi các event function trên `MonoBehaviour` mỗi frame và qua các giai đoạn khác nhau.
+- `Execution Order` là thứ tự Unity gọi callback trong Player Loop. Phase lớn có thứ tự rõ, nhưng thứ tự giữa object/script cùng phase thường không được đảm bảo.
 
 ## Key points
-- Unity `6.3`: Unity chia vòng đời `MonoBehaviour` thành nhiều phase chạy theo thứ tự cố định: Initialization, Physics, Input, Game Logic, Rendering, và Decommissioning.
-- Mỗi phase chứa các callback cụ thể, và thứ tự giữa các phase được đảm bảo, nhưng thứ tự giữa các script trong cùng một phase thì không, trừ khi cấu hình `Script Execution Order`.
-- Hiểu sai thứ tự là nguyên nhân phổ biến nhất gây bug khó debug trong Unity.
-- Phase 1 `Initialization`: `Awake` → `OnEnable` → `Start`, chạy một lần khi object khởi tạo.
-- Phase 2 `Physics`: `FixedUpdate` → physics simulation → `OnTriggerXXX` / `OnCollisionXXX`, chạy theo fixed timestep, có thể nhiều lần mỗi frame hoặc không lần nào.
-- Phase 3 `Game Logic`: `Update` → coroutine yield `null` → `LateUpdate`, chạy mỗi frame.
-- Phase 4 `Rendering`: `OnWillRenderObject` → `OnBecameVisible` / `OnBecameInvisible` → `OnPreRender` → `OnRenderObject` → `OnPostRender` → `OnRenderImage`, chạy mỗi frame cho mỗi camera.
-- Phase 5 `GUI`: `OnGUI` có thể chạy nhiều lần mỗi frame tùy số GUI event.
-- Phase 6 `Decommissioning`: `OnDisable` → `OnDestroy` → `OnApplicationQuit`, chạy khi object bị tắt hoặc hủy.
-- Tất cả managed thread bị suspend trong một số phase để đảm bảo consistency.
+- Unity `6.4`: `Awake` và `OnEnable` chạy trước `Start` khi scene load object active.
+- `SceneManager.sceneLoaded` chạy sau `OnEnable` và trước `Start` cho object trong scene.
+- `FixedUpdate` thuộc physics loop, có thể chạy 0, 1, hoặc nhiều lần trước một rendered frame.
+- `Update` chạy mỗi frame khi component enabled; `LateUpdate` chạy sau tất cả `Update`.
+- Coroutine resume tùy yield instruction: `WaitForFixedUpdate` sau fixed step, `WaitForEndOfFrame` cuối frame, `yield null` quanh vùng sau `Update`.
+- Callback rendering kiểu `OnPreCull`, `OnPreRender`, `OnRenderImage` chủ yếu áp dụng Built-in Render Pipeline/camera callback. Với URP/HDRP, ưu tiên SRP event, renderer feature, hoặc render pass.
+- `OnGUI` có thể chạy nhiều lần mỗi frame vì xử lý nhiều GUI event.
+- Không thể dựa vào thứ tự callback giữa nhiều instance cùng một `MonoBehaviour` class nếu Unity không document hoặc bạn không cấu hình rõ.
 
 ## Decision rules
-- Đặt code đúng callback tránh race condition và thứ tự sai giữa các hệ thống.
-- Physics logic trong `FixedUpdate` đảm bảo kết quả ổn định bất kể frame rate.
-- Camera follow trong `LateUpdate` đảm bảo chạy sau khi object đã di chuyển trong `Update`.
-- Luôn tham khảo execution order khi debug hành vi bất liên quan đến timing.
-- Dùng `Script Execution Order` settings khi cần một script chạy trước script khác trong cùng phase.
-- Không cố nhồi tất cả logic vào `Update`, phân chia đúng giữa `FixedUpdate`, `Update`, và `LateUpdate`.
-- Không dựa vào thứ tự mặc định giữa các script, vì Unity không đảm bảo thứ tự đó.
-- Thứ tự giữa các `MonoBehaviour` trong cùng phase là không xác định trừ khi cấu hình thủ công.
-- `OnGUI` là legacy API, UI Toolkit hoặc UGUI được khuyến khích thay thế.
-- Coroutine yield point nằm xen kẽ giữa các phase, không phải lúc nào cũng trực quan.
+- Dùng `Awake` để chuẩn bị chính object; dùng `Start` khi cần object khác đã `Awake`.
+- Dùng `FixedUpdate` cho physics, `Update` cho input/game state, `LateUpdate` cho camera hoặc follow logic.
+- Dùng `Script Execution Order` chỉ khi thật sự cần thứ tự giữa các script class. Nếu có thể, truyền dependency rõ thay vì dựa vào timing.
+- Debug bug timing bằng cách hỏi: callback này chạy **trước hay sau** object cần đọc, physics step, hoặc movement?
+- Trong URP/HDRP, không dùng Built-in camera callback làm nền tảng kiến trúc render mới.
 
 ## Example
 ```csharp

@@ -12,7 +12,7 @@ sticker: lucide//align-justify
 - `ObjectPool<T>` là class built-in trong `UnityEngine.Pool` cho phép tạo pool tái sử dụng object với các callback cho create, get, release, và destroy.
 
 ## Key points
-- Unity `6.3`: `ObjectPool<T>` là stack-based pool implement `IObjectPool<T>`, có sẵn từ Unity 2021 trở đi.
+- Unity `6.4`: `ObjectPool<T>` là stack-based pool implement `IObjectPool<T>`, có sẵn từ Unity 2021 trở đi.
 - Constructor nhận các delegate: `createFunc` để tạo object mới khi pool rỗng, `actionOnGet` khi lấy object ra, `actionOnRelease` khi trả object về, và `actionOnDestroy` khi object vượt quá `maxSize`.
 - Ngoài `ObjectPool<T>`, Unity còn cung cấp `ListPool<T>`, `HashSetPool<T>`, `DictionaryPool<TKey,TValue>`, và `CollectionPool<T>` để tái sử dụng collection thay vì allocate mới mỗi frame.
 - Gọi `pool.Get()` để lấy object: nếu pool có sẵn thì trả về và gọi `actionOnGet`, nếu rỗng thì gọi `createFunc` tạo mới.
@@ -22,17 +22,14 @@ sticker: lucide//align-justify
 - `pool.Clear()` hủy tất cả object inactive trong pool, gọi `actionOnDestroy` cho từng cái.
 
 ## Decision rules
-- API chính thức của Unity, không cần viết pool thủ công.
-- Delegate pattern cho phép customize behavior cho mọi loại object: `GameObject`, class C# thường, hoặc collection.
-- `CollectionPool` giúp tránh allocate `List`, `Dictionary` mỗi frame trong hot path.
 - Khi object được tạo và hủy thường xuyên: projectile, particle effect, enemy, UI popup.
 - Dùng `CollectionPool` khi cần `List` hoặc `Dictionary` tạm trong method mà không muốn allocate mới.
 - Dùng `Get(out PooledObject<T>)` overload khi muốn tự động release bằng `using` statement.
 - Không cần pool cho object chỉ tạo một lần và tồn tại suốt game, ví dụ player, camera, manager.
 - Không dùng cho object có state phức tạp khó reset, vì state cũ có thể gây bug nếu không cleanup kỹ.
 - Không thread-safe, chỉ gọi từ main thread.
-- Stack-based nên không đảm bảo object nào được tái sử dụng trước.
-- `collectionCheck` chỉ hoạt động trong Editor, không có trong Player build.
+- API chính thức của Unity, không cần viết pool thủ công.
+- Delegate pattern cho phép customize behavior cho mọi loại object: `GameObject`, class C# thường, hoặc collection.
 
 ## Example
 ```csharp

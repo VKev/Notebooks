@@ -6,7 +6,7 @@ tags:
 
 ## Scope
 Folder này chứa kiến thức về `UI Toolkit` trong Unity.
-Tập trung vào tài liệu Unity `6.3`, giải thích hệ thống UI hiện đại của Unity dựa trên `VisualElement`, `UXML`, và `USS`, thay thế dần hệ thống `UGUI` truyền thống cho cả Editor và runtime UI.
+Tập trung vào tài liệu Unity `6.4`, giải thích hệ thống UI hiện đại của Unity dựa trên `VisualElement`, `UXML`, và `USS`, thay thế dần hệ thống `UGUI` truyền thống cho cả Editor và runtime UI.
 
 ## Note map
 - [[Definition]]: Gốc.

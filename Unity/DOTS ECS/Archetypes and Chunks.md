@@ -17,11 +17,11 @@ sticker: lucide//align-justify
 - Mỗi chunk có kích thước `16 KiB`.
 - Khi thêm hoặc xóa component type trên một entity, `EntityManager` phải chuyển entity đó sang archetype phù hợp.
 - Dữ liệu trong chunk được lưu theo mảng cho từng component type, cộng thêm mảng entity IDs.
-- Các phần tử trong chunk được đóng gói chặt, nên iteration theo archetype rất cache-friendly.
+- Các phần tử trong chunk được đóng gói chặt, nên iteration theo archetype cache-friendly.
 - Khi entity rời chunk, Unity có thể dời entity cuối chunk lên lấp chỗ trống.
 
 ## Decision rules
-- Đây là lý do cốt lõi khiến ECS query nhanh hơn việc quét từng object rời rạc.
+- Lý do cốt lõi khiến ECS query nhanh hơn việc quét từng object rời rạc.
 - Data layout theo chunk giúp CPU cache và batch processing hoạt động tốt hơn.
 - Dùng như mental model bắt buộc khi bạn muốn hiểu vì sao ECS nhanh.
 - Khi tối ưu query, chunk utilization, và giảm structural changes.

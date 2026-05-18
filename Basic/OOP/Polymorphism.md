@@ -17,15 +17,14 @@ tags:
 - Code bên ngoài chỉ làm việc với `INotifier`, còn implementation thực tế được chọn linh hoạt.
 
 ## Decision rules
-- Làm code mở rộng dễ hơn khi thêm loại implementation mới.
-- Giảm `if-else` dựa trên type cụ thể.
-- Giúp nơi sử dụng code tập trung vào hành vi mong muốn thay vì class cụ thể.
 - Khi nhiều object cùng chia sẻ một vai trò nhưng khác cách thực hiện.
 - Khi muốn thay behavior linh hoạt theo cấu hình, runtime, hoặc dependency.
 - Không cần dùng nếu chỉ có một implementation cố định và không có áp lực thay đổi.
-- Tránh ép polymorphism vào bài toán đơn giản nếu nó làm flow khó đọc hơn.
+- Tránh ép polymorphism vào bài toán đơn giản nếu làm flow khó đọc hơn.
 - Nếu contract thiết kế kém, polymorphism sẽ khó dùng đúng.
-- Debug đôi khi khó hơn vì hành vi thực tế chỉ rõ khi runtime chọn implementation.
+- Làm code mở rộng dễ hơn khi thêm loại implementation mới.
+- Giảm `if-else` dựa trên type cụ thể.
+- Giúp nơi sử dụng code tập trung vào hành vi mong muốn thay vì class cụ thể.
 
 ## Example
 ```csharp

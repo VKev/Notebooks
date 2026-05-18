@@ -17,15 +17,14 @@ tags:
 - Code chung nằm ở class cha, còn phần đặc thù nằm ở class con.
 
 ## Decision rules
-- Giảm lặp code khi nhiều class có chung behavior nền.
-- Giúp biểu diễn quan hệ cha con rõ ràng khi domain thực sự có dạng phân cấp.
 - Khi có quan hệ cha con ổn định và hợp lý theo domain.
 - Khi class con thật sự là phiên bản chuyên biệt của class cha.
 - Tránh dùng inheritance chỉ để reuse code nhanh.
 - Tránh tạo cây kế thừa sâu nếu composition hoặc interface làm rõ intent hơn.
+- Giảm lặp code khi nhiều class có chung behavior nền.
+- Giúp biểu diễn quan hệ cha con rõ ràng khi domain thực sự có dạng phân cấp.
 - Inheritance tạo coupling mạnh giữa class con và class cha.
 - Base class đổi sai cách có thể ảnh hưởng hàng loạt class con.
-- Cây kế thừa sâu khó hiểu và khó refactor.
 
 ## Example
 ```csharp

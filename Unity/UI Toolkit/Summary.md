@@ -6,7 +6,7 @@ sticker: lucide//atom
 ---
 
 ## Version scope
-- `Unity 6.3`: UI Toolkit hỗ trợ cả Editor UI và runtime UI. Đang dần thay thế UGUI cho project mới.
+- `Unity 6.4`: UI Toolkit hỗ trợ cả Editor UI và runtime UI. Đang dần thay thế UGUI cho project mới.
 
 ## Core keywords
 - `VisualElement`: Building block cơ bản, tương tự `div` trong HTML. Mọi control đều kế thừa từ nó.
@@ -28,14 +28,14 @@ sticker: lucide//atom
 ## Decision rules
 - `Project mới cần runtime UI`: Cân nhắc UI Toolkit nếu không cần world-space UI phức tạp. Mô hình tách biệt UXML/USS/C# dễ maintain hơn.
 - `Cần world-space UI phức tạp`: Dùng UGUI Canvas world space. UI Toolkit chưa hỗ trợ đầy đủ.
-- `Cần Editor tool UI`: Dùng UI Toolkit, đây là hướng chính thức cho Editor UI. `EditorWindow` hỗ trợ UI Toolkit native.
+- `Cần Editor tool UI`: Dùng UI Toolkit, hướng chính thức cho Editor UI. `EditorWindow` hỗ trợ UI Toolkit native.
 - `Artist cần thiết kế UI`: Dùng UI Builder. Tách biệt design và code, tránh file conflict.
 
 ## Common traps
-- `Nghĩ UI Toolkit hoàn toàn thay thế UGUI ngay`: Chưa đúng. World-space UI và một số feature vẫn tốt hơn ở UGUI. Kiểm tra feature support trước khi quyết định.
+- `Nghĩ UI Toolkit hoàn toàn thay thế UGUI ngay`: Chưa đúng. World-space UI và feature vẫn tốt hơn ở UGUI. Kiểm tra feature support trước khi quyết định.
 - `Viết tất cả UI bằng C# code`: Mất lợi thế tách biệt concern. Dùng UXML cho structure, USS cho style, C# cho logic.
 - `Quên gán PanelSettings cho UIDocument`: UI không render nếu thiếu `PanelSettings`. Mỗi `UIDocument` cần reference tới `PanelSettings` asset.
-- `Dùng USS property giống hệt CSS`: USS chỉ hỗ trợ subset của CSS, một số property khác tên. Kiểm tra tài liệu USS property reference.
+- `Dùng USS property giống hệt CSS`: USS chỉ hỗ trợ subset của CSS, property khác tên. Kiểm tra tài liệu USS property reference.
 
 ## Review questions
 

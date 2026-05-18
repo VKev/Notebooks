@@ -6,7 +6,7 @@ sticker: lucide//atom
 ---
 
 ## Version scope
-- `Unity 6.3 LTS (6000.3)`: version tài liệu chính dùng để kiểm tra serialization rules, `[SerializeField]`, và `[SerializeReference]` trong section này.
+- `Unity 6.4 (6000.4)`: version tài liệu chính dùng để kiểm tra serialization rules, `[SerializeField]`, và `[SerializeReference]` trong section này.
 
 ## Core keywords
 - `Serialization`: Quá trình Unity lưu state thành dạng có thể dựng lại sau. Ảnh hưởng trực tiếp tới Inspector, scene, prefab, asset, và reload behavior.
@@ -15,7 +15,7 @@ sticker: lucide//atom
 - `[SerializeReference]`: Serialize custom class dưới dạng managed reference thay vì inline value. Dùng khi cần null, polymorphism, shared reference, hoặc graph/cycle.
 
 ## Serializable field types
-- `Primitive and Unity built-in types`: Ví dụ `int`, `float`, `bool`, `string`, `Vector3`, `Color`, `AnimationCurve`. Đây là nhóm được Unity serialize phổ biến nhất.
+- `Primitive and Unity built-in types`: Ví dụ `int`, `float`, `bool`, `string`, `Vector3`, `Color`, `AnimationCurve`. Đây là nhóm được Unity serialize phổ biến.
 - `UnityEngine.Object reference`: Reference tới object kế thừa `UnityEngine.Object` được serialize như reference. Ví dụ `GameObject`, `Transform`, `Texture`, `ScriptableObject`.
 - `Custom class or struct`: Cần `[Serializable]` nếu không kế thừa `UnityEngine.Object`. Mặc định custom class được serialize inline theo value, không giữ identity.
 - `Array and List`: Unity hỗ trợ array hoặc `List<T>` nếu `T` là type serialize được. Không hỗ trợ trực tiếp multidimensional array, jagged array, dictionary, hoặc nested container phức tạp.
@@ -30,7 +30,7 @@ sticker: lucide//atom
 - `Public field luôn là thiết kế tốt vì Inspector cần thấy`: Sai. Dùng `[SerializeField] private` để tách Inspector exposure khỏi public API.
 - `Unity serialize property giống C# serializer`: Sai. Unity serialize field; property chỉ được serialize nếu backing field được gắn attribute đúng cách.
 - `Custom class reference sẽ giữ shared identity mặc định`: Sai. Inline serialization tạo copy riêng khi serialize nhiều field trỏ cùng một instance.
-- `[SerializeReference] là default tốt hơn`: Sai. Nó có overhead cao hơn và chỉ nên dùng khi cần null, polymorphism, shared reference, hoặc graph.
+- `[SerializeReference] là default tốt hơn`: Sai. Có overhead cao hơn và chỉ nên dùng khi cần null, polymorphism, shared reference, hoặc graph.
 - `Dictionary serialize trực tiếp trong Inspector`: Sai. Unity không hỗ trợ trực tiếp dictionary trong serialization rules mặc định.
 
 ## Review questions
@@ -48,7 +48,7 @@ sticker: lucide//atom
 - Unity serialization rules không hỗ trợ dictionary trực tiếp. Cần wrap data, chuyển thành list pair, hoặc dùng custom serialization callback.
 
 ### `[SerializeReference]` giải quyết vấn đề gì?
-- Nó giữ managed reference cho custom class, hỗ trợ null, shared reference, graph/cycle, và polymorphism mà inline serialization không giữ được.
+- giữ managed reference cho custom class, hỗ trợ null, shared reference, graph/cycle, và polymorphism mà inline serialization không giữ được.
 
 ### Khi nào không nên dùng `[SerializeReference]`?
 - Khi data đơn giản, phẳng, không cần identity hoặc polymorphism. Inline serialization hiệu quả hơn về storage, memory, và load/save time.

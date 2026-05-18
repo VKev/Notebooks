@@ -6,7 +6,8 @@ sticker: lucide//atom
 ---
 
 ## Version scope
-- `Unity 6.3 LTS (6000.3)`: Texture import setting quyết định runtime texture format, memory, filtering, mipmap, và shader sampling behavior. Platform override cần được kiểm tra riêng cho desktop, iOS, Android, console, và Web.
+- `Unity 6.4 (6000.4)`: Texture import setting quyết định format runtime, memory, filtering, mipmap, và shader sampling.
+- `Platform override`: Kiểm tra riêng cho desktop, iOS, Android, console, và Web.
 
 ## Core keywords
 - `Texture Type`: Mục đích import texture như Default, Normal Map, Sprite, Cubemap. Chọn sai type dễ làm shader đọc dữ liệu sai.
@@ -21,7 +22,7 @@ sticker: lucide//atom
 ## Decision rules
 - `Texture là albedo/base color`: Bật `sRGB`. Bật mipmap nếu dùng trên mesh 3D.
 - `Texture là mask/data`: Tắt `sRGB`. Chỉ bật mipmap nếu shader thật sự sample theo khoảng cách hoặc screen size thay đổi.
-- `Texture là UI icon`: tắt mipmap nếu luôn hiển thị gần full size. Kiểm tra compression artifact vì UI dễ lộ lỗi.
+- `Texture là UI icon`: Tắt mipmap nếu luôn hiển thị gần full size. Kiểm tra compression artifact vì UI dễ lộ lỗi.
 - `Texture là ground/floor`: Bật mipmap, dùng Trilinear, tăng Aniso Level nếu cần. Texture này nhìn ở góc nghiêng.
 - `Texture cần CPU chỉnh pixel`: Bật Read/Write. Tắt lại nếu không cần để giảm memory.
 - `Build mobile`: Dùng platform override. Ưu tiên format như ASTC/ETC2 tùy target device.
@@ -29,9 +30,9 @@ sticker: lucide//atom
 ## Common traps
 - `PNG nhỏ nghĩa là runtime memory nhỏ`: Sai. Runtime memory phụ thuộc texture format sau import, resolution, mipmap, và compression.
 - `Bật sRGB cho mọi texture`: Sai. Data texture sẽ bị gamma conversion làm sai giá trị.
-- `Bật Read/Write cho an toàn`: Sai. Nó giữ thêm copy CPU-side và tăng memory.
+- `Bật Read/Write cho an toàn`: Sai. giữ thêm copy CPU-side và tăng memory.
 - `Tắt mipmap cho mọi texture để tiết kiệm memory`: Sai. Texture 3D ở xa dễ shimmer và có thể tốn bandwidth hơn.
-- `Dùng compression cao cho UI text`: Có thể gây artifact rất rõ. Cần preview trên target resolution và platform.
+- `Dùng compression cao cho UI text`: Có thể gây artifact rõ. Cần preview trên target resolution và platform.
 
 ## Review questions
 

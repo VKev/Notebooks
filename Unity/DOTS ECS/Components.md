@@ -12,23 +12,21 @@ sticker: lucide//align-justify
 
 ## Key points
 - Theo tài liệu `Entities 1.4.2`, component chứa data mà system có thể đọc hoặc ghi.
-- Dạng phổ biến nhất là `IComponentData`, là `struct` chứa unmanaged data.
+- Dạng phổ biến là `IComponentData`, là `struct` chứa unmanaged data.
 - ECS còn có nhiều loại component khác như managed, shared, tag, buffer, chunk, enableable, và singleton.
-- Mỗi entity được xác định bởi tập component type mà nó sở hữu.
+- Mỗi entity được xác định bởi tập component type mà sở hữu.
 - Tập component type này quyết định archetype của entity, và dữ liệu component được lưu trong chunk theo archetype đó.
-- Một số loại component như `Enableable` cho phép bật/tắt trạng thái mà không cần structural change đắt đỏ.
+- loại component như `Enableable` cho phép bật/tắt trạng thái mà không cần structural change đắt đỏ.
 
 ## Decision rules
-- Giúp dữ liệu tách khỏi logic và dễ tổ chức theo cache-friendly layout.
-- Giúp bạn mô tả entity bằng những mảnh data nhỏ, rõ nghĩa, dễ query.
-- Linh hoạt hơn khi thêm capability mới cho entity bằng component thay vì inheritance chain.
 - Khi bạn muốn biểu diễn state game bằng data nhỏ, rõ ràng, và có thể query theo kiểu component composition.
 - Khi muốn hệ thống xử lý hàng loạt entity có chung data shape.
 - Tránh nhét behavior phức tạp hoặc reference managed nặng vào component chỉ vì muốn giống class OOP.
 - Không phù hợp nếu bạn vẫn đang thiết kế logic theo object graph phụ thuộc lẫn nhau kiểu `MonoBehaviour`.
+- Giúp dữ liệu tách khỏi logic và dễ tổ chức theo cache-friendly layout.
+- Giúp bạn mô tả entity bằng những mảnh data nhỏ, rõ nghĩa, dễ query.
+- Linh hoạt hơn khi thêm capability mới cho entity bằng component thay vì inheritance chain.
 - Quá nhiều component nhỏ nhưng đặt tên mơ hồ sẽ làm model khó hiểu.
-- Managed component giảm bớt lợi thế hiệu năng so với unmanaged component.
-- Đổi component type thường xuyên có thể gây structural change.
 
 ## Example
 ```csharp

@@ -6,7 +6,7 @@ tags:
 
 ## Scope
 Folder này chứa kiến thức về texture trong Unity.
-Tập trung vào Unity `6.3 LTS (6000.3)`, gồm texture import settings, mipmap, mipmap streaming, compression, sRGB/data texture, wrap mode, filter mode, aniso level, và memory cost.
+Tập trung vào Unity `6.4 (6000.4)`, gồm texture import settings, mipmap, mipmap streaming, compression, sRGB/data texture, wrap mode, filter mode, aniso level, và memory cost.
 
 ## Note map
 - [[Definition]]: Gốc.

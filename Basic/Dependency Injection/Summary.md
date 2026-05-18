@@ -6,9 +6,9 @@ sticker: lucide//atom
 ---
 
 ## Core keywords
-- `Dependency`: Là object hoặc service mà class khác cần dùng. Nó có thể là logger, repository, gateway, hoặc strategy.
+- `Dependency`: Object hoặc service mà class khác cần dùng, ví dụ logger, repository, gateway, hoặc strategy.
 - `Injection`: Là hành động cung cấp dependency từ bên ngoài. Class không tự tạo dependency nữa.
-- `Constructor Injection`: Là kiểu phổ biến nhất và dễ đọc nhất. Nó làm dependency bắt buộc trở nên rất rõ.
+- `Constructor Injection`: Kiểu phổ biến và dễ đọc nhất; làm dependency bắt buộc trở nên rõ.
 
 ## Decision rules
 - `Need easier testing`: Tách dependency qua interface hoặc contract. Sau đó inject implementation vào class cần dùng.
@@ -16,7 +16,7 @@ sticker: lucide//atom
 
 ## Common traps
 - `DI nghĩa là phải dùng container`: Sai. Container chỉ là công cụ; bản chất vẫn là inject dependency từ ngoài vào.
-- `Constructor nhiều tham số là bình thường`: Không hẳn. Đây là dấu hiệu class có quá nhiều trách nhiệm.
+- `Constructor nhiều tham số là bình thường`: Không hẳn. dấu hiệu class có quá nhiều trách nhiệm.
 
 ## Review questions
 

@@ -11,14 +11,14 @@ tags:
 
 ## Key points
 - `Observer` là behavioral pattern.
-- Nó tạo quan hệ publish-subscribe giữa subject và observer.
+- tạo quan hệ publish-subscribe giữa subject và observer.
 - Subject giữ danh sách listener hoặc event subscribers.
 - Khi có thay đổi, subject phát thông báo tới tất cả observer đã đăng ký.
 - Observer phản ứng mà không cần subject biết chi tiết logic của từng observer.
 
 ## Decision rules
 - Giảm coupling giữa nơi phát sự kiện và nơi xử lý sự kiện.
-- Rất hợp cho UI update, notification, analytics, hoặc event-driven flow.
+- hợp cho UI update, notification, analytics, hoặc event-driven flow.
 - Khi một thay đổi cần thông báo cho nhiều phần khác nhau.
 - Khi bạn muốn mở rộng reaction mà không sửa object phát sự kiện quá nhiều.
 - Tránh dùng nếu chỉ có một nơi gọi trực tiếp đơn giản là đủ.

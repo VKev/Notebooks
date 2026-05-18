@@ -22,17 +22,14 @@ tags:
 - Khi raise event, dùng `EventName?.Invoke(sender, args)` để tránh lỗi khi chưa có subscriber.
 
 ## Decision rules
-- Tách event source khỏi event listener.
-- Giúp callback linh hoạt mà class phát event không cần biết implementation cụ thể của listener.
-- Phù hợp cho UI, gameplay event, notification, observer-style flow, và async callback.
 - Dùng `delegate` khi cần truyền behavior như parameter hoặc callback.
 - Dùng `event` khi một object cần thông báo một sự kiện cho nhiều subscriber.
 - Dùng `Action`, `Func`, hoặc `EventHandler<TEventArgs>` khi không cần khai báo delegate type riêng.
 - Không dùng event cho request-response cần return value rõ ràng; gọi method hoặc service interface dễ hiểu hơn.
 - Không dùng delegate/event để che giấu flow quá phức tạp; nếu thứ tự xử lý quan trọng, orchestration rõ ràng sẽ dễ debug hơn.
-- Subscriber tạo coupling tới event source và cần unsubscribe đúng lúc nếu lifecycle không trùng nhau.
-- Với multicast delegate, exception trong một handler có thể làm các handler sau không được gọi nếu không tự bắt lỗi.
-- Lambda inline khó unsubscribe nếu không giữ lại reference tới handler đã subscribe.
+- Tách event source khỏi event listener.
+- Giúp callback linh hoạt mà class phát event không cần biết implementation cụ thể của listener.
+- Phù hợp cho UI, gameplay event, notification, observer-style flow, và async callback.
 
 ## Example
 ```csharp

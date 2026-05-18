@@ -11,7 +11,7 @@ tags:
 
 ## Key points
 - `Decorator` là structural pattern.
-- Nó cho phép mở rộng behavior mà không sửa class gốc hoặc tạo quá nhiều subclass.
+- cho phép mở rộng behavior mà không sửa class gốc hoặc tạo quá nhiều subclass.
 - Có một contract chung như `INotifier`.
 - Decorator cũng implement contract đó nhưng giữ reference tới object gốc.
 - Khi nhận lời gọi, decorator có thể thêm logic trước hoặc sau khi chuyển tiếp sang object được bọc.
@@ -21,7 +21,7 @@ tags:
 - Tránh explosion số lượng subclass khi có nhiều tính năng phụ thêm.
 - Khi bạn muốn thêm logging, caching, validation, retry, hoặc behavior phụ theo kiểu lớp bọc.
 - Khi nhiều tính năng phụ có thể được kết hợp linh hoạt.
-- Bỏ qua nếu chỉ có một biến thể cố định và rất đơn giản.
+- Bỏ qua nếu chỉ có một biến thể cố định và đơn giản.
 - Tránh xếp quá nhiều decorator nếu flow trở nên khó theo dõi.
 - Nhiều lớp wrapper có thể làm debug khó hơn.
 - Stack decorator dài có thể làm behavior thực tế bớt rõ ràng.

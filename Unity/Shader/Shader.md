@@ -6,7 +6,7 @@ tags:
 
 ## Scope
 Folder này chứa kiến thức về shader trong Unity.
-Tập trung vào Unity `6.3 LTS (6000.3)`, gồm cấu trúc `ShaderLab`, code `HLSL`, pragma directive, shader variant, keyword, và render state như `Cull`, `ZWrite`, `ZTest`, `Blend`.
+Tập trung vào Unity `6.4 (6000.4)`, gồm cấu trúc `ShaderLab`, code `HLSL`, pragma directive, shader variant, keyword, và render state như `Cull`, `ZWrite`, `ZTest`, `Blend`.
 
 ## Note map
 - [[Definition]]: Gốc.

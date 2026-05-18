@@ -6,10 +6,10 @@ sticker: lucide//atom
 ---
 
 ## Core keywords
-- `SRP`: Một class nên có một lý do chính để thay đổi. Nó giúp class nhỏ và rõ trách nhiệm hơn.
+- `SRP`: Một class nên có một Lý do chính để thay đổi. giúp class nhỏ và rõ trách nhiệm hơn.
 - `OCP`: Nên mở rộng bằng abstraction hoặc composition. Tránh sửa nhiều vào code đã ổn định.
 - `LSP`: Subtype phải thay thế được base type mà không phá kỳ vọng. nền quan trọng để inheritance an toàn.
-- `ISP`: Client chỉ nên phụ thuộc vào method mà nó thật sự cần. Interface nhỏ và focused dễ dùng hơn.
+- `ISP`: Client chỉ nên phụ thuộc vào method mà thật sự cần. Interface nhỏ và focused dễ dùng hơn.
 - `DIP`: Phụ thuộc vào abstraction thay vì implementation cụ thể. nền quan trọng cho `Dependency Injection`.
 
 ## Decision rules
@@ -18,7 +18,7 @@ sticker: lucide//atom
 
 ## Common traps
 - `SOLID nghĩa là phải có interface cho mọi thứ`: Sai. Interface chỉ nên có khi thật sự tạo giá trị ở boundary hoặc variation point.
-- `SRP nghĩa là class phải rất nhỏ`: Không hẳn. Quan trọng là một trách nhiệm chính, không phải số dòng.
+- `SRP nghĩa là class phải nhỏ`: Không hẳn. Quan trọng là trách nhiệm chính, không phải số dòng.
 
 ## Review questions
 
@@ -26,7 +26,7 @@ sticker: lucide//atom
 - Là 5 nguyên tắc thiết kế hướng đối tượng giúp code dễ mở rộng và dễ bảo trì hơn.
 
 ### Nguyên tắc nào liên quan mạnh nhất đến DI?
-- `Dependency Inversion Principle`, vì nó yêu cầu code cấp cao phụ thuộc abstraction thay vì implementation cụ thể.
+- `Dependency Inversion Principle`, vì yêu cầu code cấp cao phụ thuộc abstraction thay vì implementation cụ thể.
 
 ### OCP áp dụng bằng cách nào?
 - qua interface, composition, strategy, decorator, hoặc factory.

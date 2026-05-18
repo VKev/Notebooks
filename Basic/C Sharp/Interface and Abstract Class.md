@@ -20,17 +20,14 @@ tags:
 - Interface member không có implementation truyền thống được xem là contract public; abstract class có thể kiểm soát phần public/protected tốt hơn.
 
 ## Decision rules
+- Dùng interface khi nhiều type không cùng hierarchy cần cùng capability, ví dụ `IDamageable`, `ISaveable`, `ILogger`.
+- Dùng abstract class khi các class con thực sự cùng một họ và cần reuse field, constructor, hoặc protected helper.
+- Không tạo interface chỉ vì mỗi class có một implementation duy nhất và chưa có nhu cầu thay thế.
+- Không dùng abstract class để ép mọi thứ vào một inheritance tree nếu composition đơn giản hơn.
 - Interface giúp code phụ thuộc vào capability thay vì concrete class.
 - Abstract class giúp gom behavior chung của một hierarchy có quan hệ chặt.
 - Cả hai đều giúp test, mock, và thay implementation dễ hơn nếu dependency được truyền rõ ràng.
-- Dùng interface khi nhiều type không cùng hierarchy cần cùng capability, ví dụ `IDamageable`, `ISaveable`, `ILogger`.
-- Dùng abstract class khi các class con thực sự cùng một họ và cần reuse field, constructor, hoặc protected helper.
 - Trong Unity, interface hợp để tách gameplay contract; abstract `MonoBehaviour` chỉ nên dùng khi hierarchy thật sự ổn định.
-- Không tạo interface chỉ vì mỗi class có một implementation duy nhất và chưa có nhu cầu thay thế.
-- Không dùng abstract class để ép mọi thứ vào một inheritance tree nếu composition đơn giản hơn.
-- Interface quá nhỏ và quá nhiều có thể làm code phân mảnh.
-- Abstract class tạo coupling theo inheritance, khó thay đổi hơn khi hierarchy sai.
-- Default interface member là tính năng nâng cao, không nên dùng để thay thế thiết kế API rõ ràng trong codebase nhỏ.
 
 ## Example
 ```csharp

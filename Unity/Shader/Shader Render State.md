@@ -15,7 +15,7 @@ sticker: lucide//align-justify
 - `Shader Render State` là các lệnh ShaderLab như `Cull`, `ZWrite`, `ZTest`, và `Blend` dùng để điều khiển cách GPU loại mặt, ghi depth, test depth, và trộn màu.
 
 ## Key points
-- Unity `6.3 LTS (6000.3)`: render state command có thể đặt trong `Pass` để áp dụng cho pass đó, hoặc trong `SubShader` để áp dụng cho mọi pass bên trong.
+- Unity `6.4 (6000.4)`: render state command có thể đặt trong `Pass` để áp dụng cho pass đó, hoặc trong `SubShader` để áp dụng cho mọi pass bên trong.
 - `Cull` quyết định GPU bỏ mặt nào dựa trên hướng polygon so với camera.
 - `ZWrite` quyết định pass có ghi vào depth buffer hay không.
 - `ZTest` quyết định điều kiện so sánh depth khi vẽ pixel.
@@ -23,25 +23,16 @@ sticker: lucide//align-justify
 - `Cull Back` bỏ mặt sau và là mặc định, phù hợp với mesh kín bình thường.
 - `Cull Front` bỏ mặt trước, hay dùng cho hiệu ứng inside-out hoặc outline pass.
 - `Cull Off` vẽ cả hai mặt, dùng cho lá cây, vải mỏng, double-sided wall, hoặc transparent effect.
-- `ZWrite On` dùng cho opaque object để object sau bị che đúng.
-- `ZWrite Off` dùng cho transparent object để tránh transparent object tự chặn nhau quá mạnh.
-- `ZTest LEqual` là lựa chọn phổ biến cho opaque, chỉ vẽ pixel nếu nó gần hơn hoặc bằng depth hiện tại.
-- `Blend SrcAlpha OneMinusSrcAlpha` là alpha blending phổ biến cho transparent material.
 
 ## Decision rules
-- Điều khiển đúng render state giúp tránh lỗi depth sorting, mặt trong bị hiện, transparent sai thứ tự, hoặc overdraw không cần thiết.
-- `Cull Back` giảm lượng triangle/pixel cần vẽ cho mesh kín.
-- `Cull Off` cần thiết cho geometry mỏng không có thickness thật.
 - Dùng `Cull Back`, `ZWrite On`, `ZTest LEqual` cho opaque object mặc định.
 - Dùng `Cull Off` cho lá, grass card, cloth plane, sprite-like mesh, hoặc object cần double-sided.
 - Dùng `Blend` và `ZWrite Off` cho transparent surface.
 - Dùng `Cull Front` trong outline shader kiểu vẽ mesh phóng to ra sau.
 - Không dùng `Cull Off` cho mọi thứ vì tăng chi phí vẽ và dễ gây overdraw.
 - Không tắt `ZWrite` cho opaque object vì sẽ làm depth buffer thiếu thông tin.
-- Không dùng alpha blending khi alpha clipping đủ, vì transparent sorting phức tạp hơn.
-- Transparent object vẫn cần sorting ở CPU, đặc biệt khi nhiều mesh transparent chồng nhau.
-- `Cull Off` không tạo lighting hai mặt đúng về mặt vật lý nếu shader không xử lý normal/tangent đúng.
-- Một số render pipeline có pass riêng cho shadow/depth, nên render state ở pass color không tự động áp dụng cho mọi pass khác.
+- Điều khiển đúng render state giúp tránh lỗi depth sorting, mặt trong bị hiện, transparent sai thứ tự, hoặc overdraw không cần thiết.
+- `Cull Back` giảm lượng triangle/pixel cần vẽ cho mesh kín.
 
 ## Example
 ```csharp

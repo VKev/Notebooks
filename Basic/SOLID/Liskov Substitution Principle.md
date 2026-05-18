@@ -17,15 +17,14 @@ tags:
 - Nếu subtype phải ném exception bất hoặc không làm đúng điều base type hứa, đó là dấu hiệu vi phạm `LSP`.
 
 ## Decision rules
-- Giúp inheritance và polymorphism an toàn hơn.
-- Giảm bug do subtype có hành vi bất ngờ.
-- Làm abstraction đáng tin cậy hơn khi truyền object qua base type hoặc interface.
 - Khi bạn thiết kế hierarchy kế thừa hoặc abstraction có nhiều implementation.
 - Khi một API chấp nhận base type nhưng runtime có thể nhận nhiều subtype khác nhau.
 - Tránh tạo quan hệ cha con nếu subtype không thực sự giữ được contract của supertype.
 - Tránh ép reuse bằng inheritance nếu điều đó làm subtype có hành vi bất thường.
+- Giúp inheritance và polymorphism an toàn hơn.
+- Giảm bug do subtype có hành vi bất ngờ.
+- Làm abstraction đáng tin cậy hơn khi truyền object qua base type hoặc interface.
 - `LSP` khó thấy nếu chỉ nhìn chữ ký method; bạn phải hiểu contract ngầm của hành vi.
-- Vi phạm `LSP` xuất hiện muộn, nhất là khi hierarchy lớn dần.
 
 ## Example
 ```csharp

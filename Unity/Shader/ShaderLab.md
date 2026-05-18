@@ -11,7 +11,7 @@ sticker: lucide//align-justify
 - `ShaderLab` là ngôn ngữ khai báo của Unity dùng để tổ chức `Shader`, `Properties`, `SubShader`, `Pass`, tag, render state, và block code HLSL.
 
 ## Key points
-- Unity `6.3 LTS (6000.3)`: một shader file Unity có cấu trúc lồng nhau gồm `Shader`, một hoặc nhiều `SubShader`, và các `Pass`.
+- Unity `6.4 (6000.4)`: một shader file Unity có cấu trúc lồng nhau gồm `Shader`, một hoặc nhiều `SubShader`, và các `Pass`.
 - `Shader` block định nghĩa tên shader trong Material shader menu và bọc toàn bộ cấu hình.
 - `Properties` block khai báo giá trị xuất hiện trong Inspector của Material.
 - `SubShader` block chứa implementation cho một nhóm pipeline hoặc phần cứng tương thích.
@@ -19,21 +19,16 @@ sticker: lucide//align-justify
 - Unity chọn `SubShader` đầu tiên tương thích với render pipeline và target device.
 - `Tags { "RenderPipeline" = "UniversalPipeline" }` giới hạn SubShader cho URP.
 - `Tags { "RenderPipeline" = "HDRenderPipeline" }` giới hạn SubShader cho HDRP.
-- `Pass` có thể chứa `Cull`, `ZWrite`, `ZTest`, `Blend`, và block `HLSLPROGRAM ... ENDHLSL`.
-- `HLSLINCLUDE ... ENDHLSL` dùng để chia sẻ HLSL code cho nhiều `HLSLPROGRAM` block trong cùng shader source.
 
 ## Decision rules
-- Giúp material expose property rõ ràng cho artist và designer.
-- Giúp shader có nhiều SubShader cho nhiều render pipeline khác nhau.
-- Giúp tách cấu trúc render state khỏi logic HLSL.
 - Khi viết shader tay thay vì dùng Shader Graph.
 - Khi cần custom pass, custom render state, hoặc custom GPU code.
 - Khi cần shader tương thích với URP/HDRP theo tag cụ thể.
 - Không cần viết ShaderLab tay nếu Shader Graph đủ cho hiệu ứng cần làm.
 - Tránh viết nhiều SubShader phức tạp nếu project chỉ target một pipeline cố định.
-- ShaderLab chỉ tổ chức shader, không thay thế HLSL cho logic GPU.
-- Shader khác render pipeline không tương thích trực tiếp, nhất là URP, HDRP, và Built-in RP.
-- Sai `RenderPipeline` tag có thể làm shader không chạy trong pipeline mong muốn.
+- Giúp material expose property rõ ràng cho artist và designer.
+- Giúp shader có nhiều SubShader cho nhiều render pipeline khác nhau.
+- Giúp tách cấu trúc render state khỏi logic HLSL.
 
 ## Example
 ```csharp

@@ -11,21 +11,20 @@ tags:
 
 ## Key points
 - `Factory Method` là creational pattern.
-- Nó đóng gói logic khởi tạo object vào một method hoặc class chuyên trách.
+- đóng gói logic khởi tạo object vào một method hoặc class chuyên trách.
 - Nơi sử dụng chỉ yêu cầu một abstraction hoặc một loại sản phẩm.
 - Factory quyết định tạo implementation cụ thể nào dựa trên input hoặc context.
 - Khi có loại mới, bạn mở rộng factory thay vì sửa khắp nơi gọi `new`.
 
 ## Decision rules
+- Khi việc tạo object có điều kiện hoặc cần nhiều bước khởi tạo.
+- Khi cùng một contract có nhiều implementation khác nhau.
+- Không cần factory nếu object đơn giản và chỉ có một cách tạo rõ ràng.
+- Tránh tạo factory riêng chỉ để bọc một lệnh `new` không có logic gì thêm.
+- Nếu lạm dụng, code có thể vòng vo hơn cần thiết.
 - Gom logic khởi tạo vào một chỗ.
 - Giảm coupling giữa nơi sử dụng và implementation cụ thể.
 - Làm code dễ thay đổi khi cách tạo object phức tạp dần.
-- Khi việc tạo object có điều kiện hoặc cần nhiều bước khởi tạo.
-- Khi cùng một contract có nhiều implementation khác nhau.
-- Không cần factory nếu object rất đơn giản và chỉ có một cách tạo rõ ràng.
-- Tránh tạo factory riêng chỉ để bọc một lệnh `new` không có logic gì thêm.
-- Thêm một lớp abstraction và nơi điều hướng mới.
-- Nếu lạm dụng, code có thể vòng vo hơn cần thiết.
 
 ## Example
 ```csharp

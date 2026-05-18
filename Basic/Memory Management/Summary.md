@@ -14,13 +14,13 @@ sticker: lucide//atom
 ## Boxing and unboxing
 - `Boxing`: Chuyển value type thành `object` trên heap, implicit và tốn kém. Chậm hơn gấp khoảng 20 lần so với phép gán reference thông thường.
 - `Unboxing`: Ép `object` về value type gốc, explicit và phải đúng type. Sai type sẽ throw `InvalidCastException`.
-- `Generic collection`: Dùng `List<int>` thay `ArrayList` để tránh boxing. Đây là cách phổ biến nhất để loại bỏ boxing không cần thiết.
+- `Generic collection`: Dùng `List<int>` thay `ArrayList` để tránh boxing. Đây là cách phổ biến để loại bỏ boxing không cần thiết.
 
 ## Garbage Collection
 - `Generation 0`: Chứa object mới và ngắn hạn, thu gom thường xuyên nhất. Phần lớn object chết ở đây và không sống sót qua collection.
 - `Generation 1`: Buffer giữa ngắn hạn và dài hạn. Object sống sót Gen 0 được promote lên đây.
 - `Generation 2`: Chứa object tồn tại lâu, thu gom tốn kém nhất. Full collection quét cả Gen 0, Gen 1, và Gen 2.
-- `Large Object Heap`: Chứa object lớn hơn `85,000 bytes`, thu gom cùng Gen 2. không compact, dễ bị fragmentation.
+- `Large Object Heap`: Chứa object lớn hơn `85,000 bytes`, thu gom cùng Gen 2. Không compact, dễ bị fragmentation.
 - `Mark-Relocate-Compact`: Ba pha của GC: tìm object sống, cập nhật reference, nén lại. Root gồm static field, local variable, CPU register, GC handle.
 
 ## Decision rules
@@ -32,7 +32,7 @@ sticker: lucide//atom
 ## Common traps
 - `Value type luôn ở stack`: Sai. Value type là field của class sẽ nằm trên heap cùng object chứa nó. Biến bị capture bởi lambda cũng được chuyển lên heap.
 - `Boxing không xảy ra nếu không cast rõ ràng`: Sai. Boxing là implicit, xảy ra ngầm khi gán value type vào `object`, truyền vào `string.Concat`, hoặc dùng `ArrayList`. Dùng generic để tránh.
-- `Gọi GC.Collect() giúp tối ưu performance`: Sai. Nó kích hoạt full collection tốn kém và phá vỡ heuristic tối ưu của GC. đa số trường hợp nên để GC tự quyết định.
+- `Gọi GC.Collect() giúp tối ưu performance`: Sai. kích hoạt full collection tốn kém và phá vỡ heuristic tối ưu của GC. đa số trường hợp nên để GC tự quyết định.
 - `Finalizer là cách tốt để cleanup resource`: Không đúng. Finalizer delay thu hồi object sang lần collection tiếp theo. Ưu tiên `IDisposable` và `using` statement.
 - `Struct luôn tốt hơn class vì ở stack`: Sai. Struct lớn copy tốn kém, struct có reference type field vẫn reference heap. Chỉ ưu tiên struct khi data nhỏ và ngắn hạn.
 
@@ -48,10 +48,10 @@ sticker: lucide//atom
 - GC chia heap thành Gen 0, 1, 2. Object mới vào Gen 0, sống sót thì promote lên. Thu gom Gen 0 nhanh và thường xuyên, Gen 2 là full collection tốn kém nhất.
 
 ### Khi nào value type nằm trên heap?
-- Khi nó là field của class, khi bị boxing thành `object`, hoặc khi bị capture bởi lambda hoặc closure.
+- Khi là field của class, khi bị boxing thành `object`, hoặc khi bị capture bởi lambda hoặc closure.
 
 ### Vì sao không nên gọi GC.Collect() thủ công?
-- Vì nó kích hoạt full collection quét toàn bộ heap, tốn CPU, và phá vỡ heuristic mà GC dùng để tối ưu thời điểm thu gom.
+- Vì kích hoạt full collection quét toàn bộ heap, tốn CPU, và phá vỡ heuristic mà GC dùng để tối ưu thời điểm thu gom.
 
 ### IDisposable giải quyết vấn đề gì mà GC không giải quyết được?
 - GC chỉ thu hồi managed memory. `IDisposable` cho phép giải phóng unmanaged resource như file handle, network connection ngay lập tức thay vì chờ GC.

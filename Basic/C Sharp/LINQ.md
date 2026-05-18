@@ -20,18 +20,14 @@ tags:
 - Nhiều LINQ operator dùng deferred execution, nghĩa là query chưa chạy cho tới khi enumerate bằng `foreach`, `ToList()`, `Count()`, hoặc operator terminal khác.
 
 ## Decision rules
-- Giúp code query data ngắn gọn và type-safe.
-- Dễ đọc cho các bước filter, projection, ordering, grouping.
-- Giảm boilerplate khi transform collection.
 - Dùng cho code xử lý collection không nằm trong hot path.
 - Khi mục tiêu chính là readability và transform data rõ ràng.
 - Dùng `ToList()` hoặc materialize có chủ đích khi cần snapshot kết quả một lần.
 - Tránh dùng LINQ trong hot path như `Update` mỗi frame nếu allocation hoặc deferred execution gây khó kiểm soát.
 - Không dùng LINQ khi loop rõ ràng hơn, ít allocate hơn, hoặc dễ debug hơn.
 - Không dùng query có side effect ẩn vì deferred execution có thể khiến side effect chạy nhiều lần.
-- Deferred execution dễ gây nhầm nếu source collection thay đổi trước lúc enumerate.
-- Một query có thể chạy lại nhiều lần nếu enumerate nhiều lần.
-- Với `IQueryable`, không phải mọi method C# đều dịch được sang provider backend.
+- Giúp code query data ngắn gọn và type-safe.
+- Dễ đọc cho các bước filter, projection, ordering, grouping.
 
 ## Example
 ```csharp

@@ -11,27 +11,25 @@ sticker: lucide//align-justify
 - `ScriptableObject` có lifecycle callbacks hạn chế so với `MonoBehaviour`, chỉ hỗ trợ `Awake`, `OnEnable`, `OnDisable`, `OnDestroy`, và `OnValidate`.
 
 ## Key points
-- Unity `6.3 LTS (6000.3)`: `ScriptableObject` nhận được một số messages từ Unity engine nhưng không hỗ trợ `Update`, `Start`, `LateUpdate`, hay bất kỳ per-frame callback nào.
-- Các messages được hỗ trợ gồm `Awake` khi instance được tạo, `OnEnable` khi object load, `OnDisable` khi object unload, `OnDestroy` khi object bị destroy, `OnValidate` chỉ trong Editor khi script reload hoặc Inspector thay đổi giá trị, và `Reset` để đưa về giá trị mặc định.
+- Unity `6.4 (6000.4)`: `ScriptableObject` nhận được messages từ Unity engine nhưng không hỗ trợ `Update`, `Start`, `LateUpdate`, hay bất kỳ per-frame callback nào.
+- Message runtime: `Awake`, `OnEnable`, `OnDisable`, và `OnDestroy`.
+- Message Editor: `OnValidate` khi script reload/Inspector đổi giá trị, và `Reset` để đưa về giá trị mặc định.
 - `Awake` được gọi một lần duy nhất khi instance `ScriptableObject` được tạo lần đầu.
 - `OnEnable` được gọi khi object load, khi vào Play Mode, hoặc khi recompile trong Editor.
 - `OnDisable` được gọi khi object ra khỏi scope hoặc khi thoát Play Mode.
 - `OnDestroy` được gọi ngay trước khi object bị hủy.
 - `OnValidate` chỉ chạy trong Editor, dùng để validate hoặc clamp data khi thay đổi trong Inspector.
-- vì không có `Update`, mọi logic per-frame cần được điều khiển từ một `MonoBehaviour` bên ngoài.
+- Vì không có `Update`, mọi logic per-frame cần được điều khiển từ một `MonoBehaviour` bên ngoài.
 
 ## Decision rules
-- Hiểu lifecycle giúp biết chính xác thời điểm init data và cleanup resource.
-- `OnEnable` rất phổ biến để reset data về trạng thái ban đầu mỗi khi vào Play Mode.
-- `OnValidate` hữu ích để tự động kiểm tra tính hợp lệ của data ngay trong Editor mà không cần chạy game.
 - Dùng `OnEnable` để khởi tạo hoặc reset giá trị runtime khi object load.
 - Dùng `OnValidate` để clamp giá trị hoặc enforce constraint trong Editor.
 - Dùng `OnDisable` và `OnDestroy` để giải phóng resource nếu `ScriptableObject` giữ reference tới unmanaged resource.
 - Không cố gắng đặt logic per-frame trong `ScriptableObject`, vì `Update` không được gọi.
-- Không dùng `OnValidate` cho logic runtime, vì nó chỉ chạy trong Editor.
+- Không dùng `OnValidate` cho logic runtime, vì chỉ chạy trong Editor.
 - Không có `Start`, `Update`, `FixedUpdate`, hay `LateUpdate`.
-- `OnValidate` là Editor-only, không tồn tại trong build.
-- Thứ tự gọi `OnEnable` giữa các `ScriptableObject` không được đảm bảo.
+- Hiểu lifecycle giúp biết chính xác thời điểm init data và cleanup resource.
+- `OnEnable` phổ biến để reset data về trạng thái ban đầu mỗi khi vào Play Mode.
 
 ## Example
 ```csharp

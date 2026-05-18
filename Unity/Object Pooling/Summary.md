@@ -6,7 +6,7 @@ sticker: lucide//atom
 ---
 
 ## Version scope
-- `Unity 6.3`: `ObjectPool<T>` có sẵn từ Unity 2021 trong namespace `UnityEngine.Pool`. API không thay đổi đáng kể qua các version.
+- `Unity 6.4`: `ObjectPool<T>` có sẵn từ Unity 2021 trong namespace `UnityEngine.Pool`. API không thay đổi đáng kể qua các version.
 
 ## Core keywords
 - `ObjectPool<T>`: Class built-in stack-based pool, implement `IObjectPool<T>`. Constructor nhận delegate cho create, get, release, destroy.
@@ -17,7 +17,7 @@ sticker: lucide//atom
 ## State management
 - `Reset on get`: Reset state trong `actionOnGet` khi lấy object ra. Đảm bảo object sạch trước khi dùng.
 - `Reset on release`: Reset state trong `actionOnRelease` khi trả object về. Đảm bảo pool chỉ chứa object đã cleanup.
-- `State cần reset`: Velocity, animation, coroutine, event subscription, particle, timer. Quên reset là nguyên nhân phổ biến nhất gây bug pool.
+- `State cần reset`: Velocity, animation, coroutine, event subscription, particle, timer. Quên reset là nguyên nhân phổ biến gây bug pool.
 
 ## Decision rules
 - `Object tạo và hủy thường xuyên`: Pool nó. Projectile, particle, enemy, UI popup. Giảm GC pressure đáng kể.

@@ -6,7 +6,8 @@ tags:
 
 ## Scope
 Folder này chứa kiến thức về `MonoBehaviour Lifecycle` trong Unity.
-Tập trung vào tài liệu Unity `6.3`, giải thích thứ tự thực thi các event function từ lúc object khởi tạo đến khi bị hủy, bao gồm initialization, physics, game logic, và decommissioning.
+Tập trung vào Unity `6.4`, giải thích callback nào chạy khi object khởi tạo, bật/tắt, update, xử lý physics, render, và bị hủy.
+Mục tiêu là nhớ đúng nơi đặt logic: `Awake` cho self-setup, `Start` cho cross-object setup, `FixedUpdate` cho physics, `Update` cho input/game logic, `LateUpdate` cho logic sau movement, và `OnDisable` cho cleanup.
 
 ## Note map
 - [[Definition]]: Gốc.

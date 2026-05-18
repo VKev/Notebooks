@@ -16,7 +16,7 @@ sticker: lucide//atom
 
 ## Decision rules
 - `Cần callback một hàm`: Dùng delegate, `Action`, hoặc `Func`. Nếu có nhiều listener và ý nghĩa là thông báo sự kiện, dùng event.
-- `Cần contract cho nhiều type không cùng hierarchy`: Dùng interface. Nó giúp dependency injection và testing tự nhiên hơn.
+- `Cần contract cho nhiều type không cùng hierarchy`: Dùng interface. giúp dependency injection và testing tự nhiên hơn.
 - `Cần reuse state hoặc behavior trong cùng một family`: Dùng abstract class. Chỉ nên dùng khi quan hệ inheritance thật sự bền.
 - `Cần collection hoặc service type-safe cho nhiều model`: Dùng generics. Thêm constraint khi generic code cần gọi member cụ thể.
 - `Cần query collection dễ đọc`: Dùng LINQ ngoài hot path. Trong loop performance-critical, cân nhắc loop để kiểm soát allocation.
@@ -46,7 +46,8 @@ sticker: lucide//atom
 - Constraint báo cho compiler biết type argument phải thỏa điều kiện nào, nhờ đó generic code được phép gọi member hoặc constructor tương ứng.
 
 ### Covariance và contravariance là gì?
-- Covariance cho phép dùng type derived ở vị trí type base trong output, ví dụ `IEnumerable<Derived>` thành `IEnumerable<Base>`. Contravariance cho phép dùng type base ở vị trí input, ví dụ `Action<Base>` thành `Action<Derived>`.
+- Covariance: output có thể đi từ derived sang base, ví dụ `IEnumerable<Derived>` dùng như `IEnumerable<Base>`.
+- Contravariance: input có thể đi từ base sang derived, ví dụ `Action<Base>` dùng như `Action<Derived>`.
 
 ### Deferred execution trong LINQ là gì?
 - Là việc query chưa chạy khi khai báo mà chỉ chạy khi enumerate, ví dụ qua `foreach`, `ToList()`, hoặc `Count()`.

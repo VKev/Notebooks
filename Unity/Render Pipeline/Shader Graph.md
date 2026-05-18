@@ -11,7 +11,7 @@ sticker: lucide//align-justify
 - `Shader Graph` là công cụ visual trong Unity cho phép tạo shader bằng cách nối node trên đồ thị thay vì viết code HLSL.
 
 ## Key points
-- Unity `6.3 LTS (6000.3)`: `Shader Graph` là visual editor cho phép artist và developer tạo shader bằng cách kéo thả node và nối chúng lại, không cần viết HLSL thủ công.
+- Unity `6.4 (6000.4)`: `Shader Graph` là visual editor cho phép artist và developer tạo shader bằng cách kéo thả node và nối chúng lại, không cần viết HLSL thủ công.
 - Shader Graph chỉ hoạt động với SRP-based pipeline (`URP` và `HDRP`), không hỗ trợ Built-in RP.
 - Output của Shader Graph là shader asset có thể gán vào material giống shader viết tay.
 - Tạo Shader Graph asset qua Assets > Create > Shader Graph, chọn loại phù hợp với pipeline đang dùng.
@@ -21,20 +21,14 @@ sticker: lucide//align-justify
 - Preview window hiển thị kết quả real-time khi chỉnh sửa node.
 
 ## Decision rules
-- Artist có thể tạo và chỉnh shader trực quan mà không cần biết HLSL.
-- Iteration nhanh hơn nhờ preview real-time và node-based workflow.
-- Giảm lỗi cú pháp shader và dễ debug visual hơn so với code text.
-- Tạo điều kiện collaboration giữa artist và programmer.
 - Khi project dùng `URP` hoặc `HDRP` và cần custom shader.
 - Khi artist muốn tạo hiệu ứng visual mà không phụ thuộc vào programmer.
 - Dùng cho prototype nhanh hiệu ứng shader trước khi optimize bằng HLSL nếu cần.
 - Tránh nếu project dùng Built-in RP, vì Shader Graph không hỗ trợ.
 - Không dùng cho shader cực kỳ phức tạp hoặc cần tối ưu performance tối đa, viết HLSL trực tiếp có thể hiệu quả hơn.
 - Không dùng cho compute shader hoặc shader không liên quan đến rendering visual.
-- Chỉ hỗ trợ URP và HDRP, không hỗ trợ Built-in RP.
-- Shader Graph có thể tạo shader dài hơn cần thiết so với HLSL viết tay.
-- Một số kỹ thuật shader nâng cao không thể thực hiện hoàn toàn bằng node, cần Custom Function node để viết HLSL inline.
-- Shader Graph giữa URP và HDRP không hoàn toàn tương thích do Master Stack khác nhau.
+- Artist có thể tạo và chỉnh shader trực quan mà không cần biết HLSL.
+- Iteration nhanh hơn nhờ preview real-time và node-based workflow.
 
 ## Example
 ```

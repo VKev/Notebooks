@@ -11,7 +11,7 @@ sticker: lucide//align-justify
 - `ScriptableObject` lưu data vĩnh viễn trong Editor nhưng chỉ tồn tại tạm thời trong runtime build.
 
 ## Key points
-- Unity `6.3 LTS (6000.3)`: `ScriptableObject` asset là file `.asset` được serialize trong project, giữ data qua các lần mở Editor.
+- Unity `6.4 (6000.4)`: `ScriptableObject` asset là file `.asset` được serialize trong project, giữ data qua các lần mở Editor.
 - Trong Editor Play Mode, thay đổi data trên `ScriptableObject` sẽ tồn tại sau khi thoát Play Mode, khác với `MonoBehaviour` thông bị reset.
 - Trong standalone build, `ScriptableObject` asset là read-only, mọi thay đổi runtime sẽ mất khi tắt application.
 - Instance tạo bằng `ScriptableObject.CreateInstance<T>()` lúc runtime là tạm thời, không tự động gắn vào asset system.
@@ -21,17 +21,14 @@ sticker: lucide//align-justify
 - Reference tới `GameObject` hoặc `MonoBehaviour` trong scene sẽ null khi scene đó unload, vì asset không serialize được reference tới scene object.
 
 ## Decision rules
-- Data persist qua scene load mà không cần `DontDestroyOnLoad` hay static variable.
-- Nhiều object có thể reference cùng một asset, tránh duplicate data và giảm memory.
-- Thay đổi trong Editor Play Mode tồn tại giúp test và iterate nhanh hơn, nhưng cần cẩn thận vì có thể ghi đè data gốc.
 - Khi cần chia sẻ configuration data giữa nhiều scene, nhiều prefab.
 - Khi data là authoring-time và không cần thay đổi vĩnh viễn lúc runtime.
 - Khi muốn tránh duplicate bộ nhớ cho các giá trị mà nhiều instance dùng chung.
 - Không dùng để lưu save game hay player progress, vì data không persist trong build mà cần hệ thống save riêng như JSON hoặc binary serialization.
 - Không reference `GameObject` trong scene từ `ScriptableObject` asset, vì reference sẽ null khi scene unload.
-- Trong build, mọi thay đổi runtime chỉ là tạm thời và mất khi application đóng.
-- `EditorUtility.SetDirty()` và `AssetDatabase.SaveAssets()` chỉ hoạt động trong Editor, không dùng được trong build.
-- Reference tới scene object gây type mismatch trong Inspector và null khi scene bị unload.
+- Data persist qua scene load mà không cần `DontDestroyOnLoad` hay static variable.
+- Nhiều object có thể reference cùng một asset, tránh duplicate data và giảm memory.
+- Thay đổi trong Editor Play Mode tồn tại giúp test và iterate nhanh hơn, nhưng cần cẩn thận vì có thể ghi đè data gốc.
 
 ## Example
 ```csharp

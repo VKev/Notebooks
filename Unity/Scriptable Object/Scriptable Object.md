@@ -6,7 +6,7 @@ tags:
 
 ## Scope
 Folder này chứa kiến thức về `Scriptable Object` trong Unity.
-Tập trung vào tài liệu Unity `6.3 LTS (6000.3)`, giải thích cách tạo, quản lý, và ứng dụng `ScriptableObject` để tách data khỏi logic và xây dựng kiến trúc modular trong game.
+Tập trung vào tài liệu Unity `6.4 (6000.4)`, giải thích cách tạo, quản lý, và ứng dụng `ScriptableObject` để tách data khỏi logic và xây dựng kiến trúc modular trong game.
 
 ## Note map
 - [[Definition]]: Gốc.

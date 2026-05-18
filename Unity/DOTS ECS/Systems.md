@@ -19,15 +19,14 @@ sticker: lucide//align-justify
 - Các system được nhóm trong system groups; thứ tự update có thể được điều khiển bởi `UpdateInGroup`, `UpdateBefore`, và `UpdateAfter`.
 
 ## Decision rules
-- Giữ logic tập trung theo loại xử lý thay vì rải behavior vào từng object.
-- Phù hợp với batch processing và job scheduling.
-- Dễ tối ưu hơn vì query và update order rõ ràng.
 - Khi bạn có rule gameplay hoặc simulation cần áp dụng cho nhiều entity có cùng data shape.
 - Khi logic nên chạy theo phase hoặc group trong frame.
 - Tránh cố nhồi state local phức tạp vào system nếu dữ liệu đó thực ra nên là component.
 - Không cần ECS system cho những logic editor-only hoặc những flow nhỏ đang hoạt động tốt với `MonoBehaviour`.
+- Giữ logic tập trung theo loại xử lý thay vì rải behavior vào từng object.
+- Phù hợp với batch processing và job scheduling.
+- Dễ tối ưu hơn vì query và update order rõ ràng.
 - Update order giữa nhiều system có thể khó theo dõi nếu group và attribute bị dùng thiếu kỷ luật.
-- Tất cả callback của system vẫn bắt đầu từ main thread; muốn tận dụng đa luồng thì bạn phải schedule job đúng cách.
 
 ## Example
 ```csharp

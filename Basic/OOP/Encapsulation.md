@@ -17,15 +17,14 @@ tags:
 - Nhờ vậy, logic validate và state luôn đi cùng nhau thay vì bị rải ra bên ngoài.
 
 ## Decision rules
+- Khi class có state cần được bảo vệ hoặc validate.
+- Khi bạn muốn gom business rule liên quan đến dữ liệu vào đúng object sở hữu dữ liệu đó.
+- Không cần bọc quá mức cho những data carrier đơn giản nếu việc đó không tạo thêm giá trị.
+- Tránh tạo getter/setter trống cho mọi field rồi gọi đó là encapsulation, vì như vậy logic vẫn không được bảo vệ.
+- Nếu lạm dụng wrapper method vô nghĩa, code sẽ dài mà không rõ hơn.
 - Giữ object ở trạng thái hợp lệ dễ hơn.
 - Giảm nguy cơ code bên ngoài sửa dữ liệu sai cách.
 - Làm API của class rõ ràng hơn: người dùng biết nên làm gì, không nên chạm vào đâu.
-- Khi class có state cần được bảo vệ hoặc validate.
-- Khi bạn muốn gom business rule liên quan đến dữ liệu vào đúng object sở hữu dữ liệu đó.
-- Không cần bọc quá mức cho những data carrier rất đơn giản nếu việc đó không tạo thêm giá trị.
-- Tránh tạo getter/setter trống cho mọi field rồi gọi đó là encapsulation, vì như vậy logic vẫn không được bảo vệ.
-- Nếu lạm dụng wrapper method vô nghĩa, code sẽ dài mà không rõ hơn.
-- Encapsulation chỉ hiệu quả khi class thực sự sở hữu và kiểm soát logic của state đó.
 
 ## Example
 ```csharp

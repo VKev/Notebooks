@@ -6,8 +6,8 @@ sticker: lucide//atom
 ---
 
 ## Core keywords
-- `Object`: Là đơn vị chứa dữ liệu và hành vi. Nó đại diện cho một thực thể trong bài toán.
-- `Class`: Là bản thiết kế để tạo object. Nó định nghĩa field, property, và method.
+- `Object`: Là đơn vị chứa dữ liệu và hành vi. đại diện cho một thực thể trong bài toán.
+- `Class`: Là bản thiết kế để tạo object. định nghĩa field, property, và method.
 
 ## Four core principles
 - `Encapsulation`: Giấu chi tiết nội bộ và kiểm soát truy cập. Giúp giữ state ổn định hơn.
@@ -20,7 +20,7 @@ sticker: lucide//atom
 - `Need reuse behavior`: Xem composition trước rồi mới nghĩ đến inheritance. Composition mềm dẻo hơn khi requirements thay đổi.
 
 ## Common traps
-- `Một class làm quá nhiều việc`: dấu hiệu responsibility chưa tách rõ. Sau này rất khó test và khó sửa.
+- `Một class làm quá nhiều việc`: Dấu hiệu responsibility chưa tách rõ. Sau này khó test và khó sửa.
 - `Inheritance là cách reuse mặc định`: Không đúng. Nhiều trường hợp composition an toàn hơn.
 
 ## Review questions

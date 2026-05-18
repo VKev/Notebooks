@@ -6,7 +6,7 @@ tags:
 
 ## Scope
 Folder này chứa kiến thức về `Object Pooling` trong Unity.
-Tập trung vào tài liệu Unity `6.3`, giải thích cách tái sử dụng object thay vì liên tục tạo và hủy, nhằm giảm GC pressure và tăng hiệu năng runtime.
+Tập trung vào tài liệu Unity `6.4`, giải thích cách tái sử dụng object thay vì liên tục tạo và hủy, nhằm giảm GC pressure và tăng hiệu năng runtime.
 
 ## Note map
 - [[Definition]]: Gốc.

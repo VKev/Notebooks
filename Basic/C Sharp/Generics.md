@@ -18,20 +18,17 @@ tags:
 - Nếu không có constraint, compiler chỉ giả định `T` có member của `object`.
 - Constraint mở khóa member hoặc constructor mà generic code được phép gọi.
 - Generic type mặc định là invariant, nên `List<Derived>` không thay thế được `List<Base>`.
-- Một số interface/delegate có variance: `IEnumerable<out T>` covariant, `Action<in T>` contravariant.
+- interface/delegate có variance: `IEnumerable<out T>` covariant, `Action<in T>` contravariant.
 
 ## Decision rules
-- Tăng type safety và giảm cast runtime.
 - Tránh boxing khi dùng collection generic với value type, ví dụ `List<int>` thay vì non-generic collection.
-- Reuse algorithm và data structure mà vẫn giữ API rõ ràng.
 - Khi logic giống nhau cho nhiều type nhưng vẫn cần compile-time type checking.
 - Dùng constraint khi generic code thật sự cần gọi member cụ thể của `T`.
 - Dùng interface generic khi muốn contract reusable như `IRepository<T>`, `IComparer<T>`, `IObjectPool<T>`.
 - Không generic hóa code nếu chỉ có một type và không có áp lực tái sử dụng thật.
 - Không thêm constraint rộng hoặc phức tạp chỉ để né thiết kế interface rõ ràng.
-- Variance chỉ áp dụng cho generic interface và generic delegate, không áp dụng cho class như `List<T>`.
-- Variance chỉ áp dụng cho reference type; value type vẫn invariant trong constructed variant type.
-- Generic overuse có thể làm API khó đọc hơn lợi ích nó mang lại.
+- Tăng type safety và giảm cast runtime.
+- Reuse algorithm và data structure mà vẫn giữ API rõ ràng.
 
 ## Example
 ```csharp

@@ -20,20 +20,16 @@ sticker: lucide//align-justify
 - `Pack Together` gom tất cả asset trong group vào một AssetBundle, tốt cho asset dùng cùng nhau.
 - `Pack Separately` tạo riêng bundle cho mỗi asset, tốt cho asset load độc lập.
 - `Content Catalog` là file mapping giữa address và vị trí physical của asset, được tạo khi build.
-- `Profiles` cho phép cấu hình nhiều bộ build/load path cho các môi trường khác nhau (local dev, staging, production).
 
 ## Decision rules
-- Kiểm soát granularity của AssetBundle: gom nhiều asset nhỏ giảm overhead loading, tách asset lớn cho phép unload riêng lẻ.
-- Hỗ trợ remote content: group có thể cấu hình load từ CDN, cho phép update content mà không cần rebuild app.
-- Label cho phép load nhóm asset theo logic game mà không phụ thuộc vào cấu trúc thư mục.
 - Khi cần kiểm soát cách asset được đóng gói và phân phối.
 - Khi có remote content cần update riêng biệt với app.
 - Dùng label khi cần load tất cả asset thuộc một category, ví dụ tất cả asset có label `"level1"`.
 - Không cần cấu hình phức tạp cho project nhỏ, default group setting đủ.
 - Không tạo quá nhiều group nhỏ, vì mỗi bundle có overhead memory riêng.
 - Không thể partial unload AssetBundle: tất cả asset trong bundle phải unload cùng lúc.
-- Quá nhiều bundle nhỏ tăng memory overhead và load request, quá ít bundle lớn giảm khả năng unload granular.
-- Remote content cần infrastructure CDN và catalog update workflow riêng.
+- Kiểm soát granularity của AssetBundle: gom nhiều asset nhỏ giảm overhead loading, tách asset lớn cho phép unload riêng lẻ.
+- Hỗ trợ remote content: group có thể cấu hình load từ CDN, cho phép update content mà không cần rebuild app.
 
 ## Example
 ```
@@ -49,7 +45,6 @@ Addressable Group được cấu hình trong Editor, không phải code:
 6. Build: Addressables > Build > New Build > Default Build Script
 Load theo label trong code:
 ```
-
 ```csharp
 using UnityEngine;
 using UnityEngine.AddressableAssets;

@@ -12,24 +12,22 @@ sticker: lucide//align-justify
 
 ## Key points
 - `AwaitableCompletionSource` là producer side của một `Awaitable`.
-- Nó cho bạn lấy ra `Awaitable` để nơi khác `await`, trong khi chính code của bạn quyết định lúc nào `SetResult`, `SetException`, hoặc `SetCanceled`.
-- Nó là bản tương đương theo hướng Unity-native của ý tưởng `TaskCompletionSource`.
+- cho bạn lấy ra `Awaitable` để nơi khác `await`, trong khi chính code của bạn quyết định lúc nào `SetResult`, `SetException`, hoặc `SetCanceled`.
+- là bản tương đương theo hướng Unity-native của ý tưởng `TaskCompletionSource`.
 - Tạo một `AwaitableCompletionSource` hoặc `AwaitableCompletionSource<T>`.
 - Lấy `Awaitable` từ property `Awaitable`.
 - Ở nơi khác, khi sự kiện người dùng hoặc điều kiện nào đó xảy ra, gọi `SetResult`, `SetException`, `SetCanceled`, hoặc các biến thể `TrySet...`.
-- Unity `6.3`: bạn cũng có thể `Reset` để đưa completion source sang một `Awaitable` mới.
+- Unity `6.4`: bạn cũng có thể `Reset` để đưa completion source sang một `Awaitable` mới.
 
 ## Decision rules
-- Giúp bridge giữa event/callback/UI và flow `await`.
 - Tránh phải tự viết state machine thủ công khi chờ input người dùng hoặc tín hiệu từ hệ thống khác.
-- Là cách chính thức của Unity để tự raise completion cho `Awaitable`.
-- Khi bạn có UI prompt, popup xác nhận, hoặc event-based flow nhưng muốn tiêu thụ nó bằng `await`.
+- Khi bạn có UI prompt, popup xác nhận, hoặc event-based flow nhưng muốn tiêu thụ bằng `await`.
 - Khi bạn cần một điểm completion do user code kiểm soát thay vì do Unity API trả về sẵn.
 - Không cần dùng nếu Unity đã có sẵn API async phù hợp như `SceneManager.LoadSceneAsync` hoặc `Awaitable.WaitForSecondsAsync`.
 - Tránh dùng để che giấu một flow quá phức tạp nếu bản thân source event và lifecycle chưa rõ ràng.
-- Bạn phải tự chịu trách nhiệm lifecycle và bảo đảm completion được raise đúng lúc.
 - Nếu quên `SetResult` hoặc `SetCanceled`, nơi `await` có thể chờ mãi.
-- Nếu object phát completion bị destroy hoặc state đổi bất ngờ, flow có thể bị kẹt nếu không thiết kế cancel path.
+- Giúp bridge giữa event/callback/UI và flow `await`.
+- Là cách chính thức của Unity để tự raise completion cho `Awaitable`.
 
 ## Example
 ```csharp

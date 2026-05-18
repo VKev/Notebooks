@@ -18,20 +18,16 @@ tags:
 - Value type khai báo trong local scope như `int`, `float`, `bool`, `struct` được lưu trực tiếp trên stack.
 - Reference type như `class`, `interface`, `string`, `delegate` luôn được cấp phát trên heap, nhưng biến reference trỏ tới chúng nằm trên stack.
 - Ngoại lệ quan trọng: value type là field của class sẽ nằm trên heap cùng với object chứa nó, không phải trên stack.
-- Static variable luôn nằm trên heap và tồn tại suốt vòng đời application.
-- Biến bị capture bởi lambda hoặc closure cũng được compiler chuyển lên heap.
 
 ## Decision rules
+- Dùng local variable thay vì field cấp class khi data chỉ cần trong phạm vi một method.
+- Không cố ép mọi thứ lên stack bằng cách dùng struct quá lớn, vì copy struct lớn trên stack cũng tốn chi phí.
+- Không lo lắng quá mức về stack vs heap cho code không nằm trong hot path, vì overhead không đáng kể.
+- Không thể kiểm soát chính xác thời điểm GC thu hồi object trên heap.
 - Hiểu stack và heap giúp dự đoán được chi phí bộ nhớ và hiệu năng của code.
 - Stack allocation nhanh hơn heap allocation vì chỉ cần dịch con trỏ stack, không cần GC quản lý.
 - Biết data nằm ở đâu giúp tránh boxing không cần thiết và giảm GC pressure.
 - Ưu tiên `struct` thay vì `class` khi data nhỏ, ngắn hạn, và không cần polymorphism để tận dụng stack allocation.
-- Dùng local variable thay vì field cấp class khi data chỉ cần trong phạm vi một method.
-- Không cố ép mọi thứ lên stack bằng cách dùng struct quá lớn, vì copy struct lớn trên stack cũng tốn chi phí.
-- Không lo lắng quá mức về stack vs heap cho code không nằm trong hot path, vì overhead không đáng kể.
-- Stack có kích thước giới hạn, mặc định `1 MB` trên mỗi thread, gọi đệ quy quá sâu hoặc khai báo quá nhiều local variable lớn sẽ gây `StackOverflowException`.
-- Heap có thể bị fragmentation khi object được cấp phát và thu hồi liên tục, dù GC có compact để giảm vấn đề này.
-- Không thể kiểm soát chính xác thời điểm GC thu hồi object trên heap.
 
 ## Example
 ```csharp

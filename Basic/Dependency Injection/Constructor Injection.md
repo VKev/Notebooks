@@ -7,7 +7,7 @@ tags:
 ---
 
 ## Core idea
-- `Constructor Injection` là cách inject dependency phổ biến nhất, trong đó dependency được truyền vào ngay khi object được tạo.
+- `Constructor Injection` là cách inject dependency phổ biến, trong đó dependency được truyền vào ngay khi object được tạo.
 
 ## Key points
 - một hình thức của `Dependency Injection`.
@@ -17,15 +17,14 @@ tags:
 - Class sau đó chỉ làm việc với abstraction hoặc contract đã nhận.
 
 ## Decision rules
-- Làm dependency trở nên rõ ràng ngay từ lúc đọc constructor.
-- Giúp object luôn ở trạng thái hợp lệ sau khi được tạo.
-- Giúp viết test dễ hơn vì có thể truyền mock hoặc fake implementation.
 - Khi dependency là bắt buộc để class hoạt động đúng.
 - Dùng cho service, application layer, hoặc domain logic có dependency rõ ràng.
 - Không cần dùng nếu class thật sự không có dependency nào đáng kể.
 - Tránh nhét quá nhiều dependency vào constructor vì đó là dấu hiệu class làm quá nhiều việc.
-- Constructor quá dài làm code khó đọc và là dấu hiệu cần refactor trách nhiệm.
 - Nếu lạm dụng abstraction quá sớm, hệ thống có thể phức tạp hơn mức cần thiết.
+- Làm dependency trở nên rõ ràng ngay từ lúc đọc constructor.
+- Giúp object luôn ở trạng thái hợp lệ sau khi được tạo.
+- Giúp viết test dễ hơn vì có thể truyền mock hoặc fake implementation.
 
 ## Example
 ```csharp

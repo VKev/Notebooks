@@ -6,7 +6,7 @@ tags:
 
 ## Scope
 Folder này chứa kiến thức về `Render Pipeline` trong Unity.
-Tập trung vào tài liệu Unity `6.3 LTS (6000.3)`, giải thích kiến trúc `Scriptable Render Pipeline`, `Render Graph`, custom render pass, và các pipeline chính thức gồm `URP`, `HDRP`, cùng công cụ `Shader Graph` để tạo shader trực quan.
+Tập trung vào tài liệu Unity `6.4 (6000.4)`, giải thích kiến trúc `Scriptable Render Pipeline`, `Render Graph`, custom render pass, và các pipeline chính thức gồm `URP`, `HDRP`, cùng công cụ `Shader Graph` để tạo shader trực quan.
 
 ## Note map
 - [[Definition]]: Gốc.

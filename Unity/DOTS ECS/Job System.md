@@ -8,10 +8,10 @@ sticker: lucide//align-justify
 ---
 
 ## Core idea
-- `Job System` cho phép Unity chạy code đa luồng an toàn hơn để tận dụng nhiều CPU core, và là mảnh ghép rất quan trọng khi ECS cần scale.
+- `Job System` cho phép Unity chạy code đa luồng an toàn hơn để tận dụng nhiều CPU core, và là mảnh ghép quan trọng khi ECS cần scale.
 
 ## Key points
-- Theo Unity Manual `6.3`, job system cho phép bạn viết multithreaded code để dùng các CPU core hiệu quả hơn.
+- Theo Unity Manual `6.4`, job system cho phép bạn viết multithreaded code để dùng các CPU core hiệu quả hơn.
 - Job system có thể dùng độc lập, nhưng Unity khuyến nghị kết hợp với `Burst` để đạt hiệu năng tốt hơn.
 - Tài liệu cũng nêu rõ bạn có thể dùng job system cùng ECS để tạo data-oriented code hiệu năng cao.
 - Unity dùng worker threads để thực thi job song song với main thread.
@@ -20,16 +20,14 @@ sticker: lucide//align-justify
 - Dữ liệu gửi vào job phải là blittable hoặc các kiểu thread-safe phù hợp, vì Unity copy data sang native memory khi schedule job.
 
 ## Decision rules
-- Tăng throughput CPU cho các tác vụ có thể song song hóa.
-- Giảm áp lực cho main thread khi xử lý lượng lớn entity.
-- Phối hợp rất tốt với ECS query và data layout theo chunk.
 - Khi system ECS cần xử lý số lượng lớn entity và phần việc có thể chia song song.
 - Khi bạn muốn schedule `IJobEntity`, `IJobChunk`, hoặc job song song khác từ `OnUpdate`.
 - Tránh dùng cho logic cực ngắn hoặc quá phụ thuộc main thread API của Unity.
 - Không phải lựa chọn thay thế cho `async/await` hay `Coroutine` trong các bài toán chờ `I/O`, frame timing, hoặc event flow.
-- Phải tuân theo rule thread-safe và kiểu dữ liệu phù hợp.
-- Code đa luồng khó debug hơn logic main-thread thông thường.
 - Nếu bài toán không đủ lớn hoặc không đủ song song, chi phí schedule có thể không đáng.
+- Tăng throughput CPU cho các tác vụ có thể song song hóa.
+- Giảm áp lực cho main thread khi xử lý lượng lớn entity.
+- Phối hợp tốt với ECS query và data layout theo chunk.
 
 ## Example
 ```csharp

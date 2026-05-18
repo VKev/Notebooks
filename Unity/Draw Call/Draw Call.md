@@ -6,7 +6,7 @@ tags:
 
 ## Scope
 Folder này chứa kiến thức về `Draw Call` và các kỹ thuật tối ưu draw call trong Unity.
-Tập trung vào Unity `6.3`, đặc biệt các kỹ thuật như `Batching`, `GPU Instancing`, `SRP Batcher`, và `Render State`, cùng các nguyên tắc kiểm tra bằng `Stats`, `Profiler`, và `Frame Debugger`.
+Tập trung vào Unity `6.4`, đặc biệt các kỹ thuật như `Batching`, `GPU Instancing`, `SRP Batcher`, và `Render State`, cùng các nguyên tắc kiểm tra bằng `Stats`, `Profiler`, và `Frame Debugger`.
 
 ## Note map
 - [[Definition]]: Gốc.

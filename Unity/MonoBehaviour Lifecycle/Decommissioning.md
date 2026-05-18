@@ -8,30 +8,23 @@ sticker: lucide//align-justify
 ---
 
 ## Core idea
-- `Decommissioning` gồm `OnDisable`, `OnDestroy`, và `OnApplicationQuit`, là các callback chạy khi object bị tắt, hủy, hoặc application đóng.
+- `Decommissioning` là phần cleanup của lifecycle: `OnDisable` dọn kết nối tạm thời, `OnDestroy` dọn object sắp bị hủy, `OnApplicationPause/Focus/Quit` xử lý app mất focus hoặc đóng.
 
 ## Key points
-- Unity `6.3`: `OnDisable` được gọi khi object hoặc component bị disable, dùng để unsubscribe event và dọn dẹp tạm thời.
-- `OnDestroy` được gọi khi object bị hủy hoàn toàn bởi `Destroy()` hoặc khi scene unload, dùng để cleanup resource cuối cùng.
-- `OnApplicationQuit` được gọi trước khi application tắt, dùng để lưu data hoặc đóng kết nối.
-- `OnDisable` chạy mỗi khi `gameObject.SetActive(false)` hoặc `enabled = false`, và đối xứng với `OnEnable`.
-- `OnDestroy` chạy một lần duy nhất khi object bị hủy, sau `OnDisable`.
-- `OnApplicationQuit` chạy trước khi application đóng, trước `OnDestroy` của các object còn sống.
-- Khi chuyển scene, object không có `DontDestroyOnLoad` sẽ nhận `OnDisable` → `OnDestroy`.
-- Trong Editor, thoát Play Mode cũng kích hoạt `OnDisable` → `OnDestroy`.
+- `OnDisable` chạy khi component bị disable, GameObject/parent bị deactivate, object bị destroy, scene unload, hoặc domain reload.
+- `OnDisable` đối xứng với `OnEnable`; đây là nơi chính để unsubscribe event, dừng listener, và trả state tạm.
+- `OnDestroy` chạy khi GameObject/component sắp bị destroy, khi scene unload, hoặc khi thoát Play Mode/runtime. Unity chỉ gọi nó cho GameObject đã từng active.
+- Trên mobile, hệ điều hành có thể kill app sau khi suspend, nên `OnDestroy`/`OnApplicationQuit` không đáng tin để save dữ liệu quan trọng.
+- `OnApplicationQuit` gửi tới active GameObject trước khi app quit; iOS thường suspend thay vì quit.
+- Dữ liệu quan trọng nên save khi `OnApplicationPause(true)` hoặc `OnApplicationFocus(false)`, không đợi quit.
 
 ## Decision rules
-- Đảm bảo cleanup đối xứng với initialization: subscribe trong `OnEnable` thì unsubscribe trong `OnDisable`.
-- Tránh memory leak và null reference do event listener còn tồn tại sau khi object bị hủy.
-- `OnApplicationQuit` cho phép lưu trạng thái cuối cùng trước khi tắt game.
-- Dùng `OnDisable` để unsubscribe event, dừng coroutine, release pooled object.
-- Dùng `OnDestroy` để dispose unmanaged resource, remove khỏi static list, cleanup final.
-- Dùng `OnApplicationQuit` để save game state, flush log, đóng network connection.
-- Không đặt logic quan trọng chỉ trong `OnApplicationQuit`, vì trên mobile callback này không được đảm bảo chạy khi app bị kill.
-- Không gọi `Destroy` trên object khác trong `OnDestroy`, vì thứ tự destroy không xác định.
-- `OnApplicationQuit` không đáng tin cậy trên iOS và Android khi user swipe kill app.
-- Thứ tự `OnDestroy` giữa các object là không xác định.
-- `OnDisable` chạy trước `OnDestroy`, nên resource cleanup cuối cùng nên đặt trong `OnDestroy`.
+- Subscribe trong `OnEnable`, unsubscribe trong `OnDisable`.
+- Trả object về pool bằng API pool, không chỉ `SetActive(false)` rời rạc nếu pool cần bookkeeping.
+- Dùng `OnDestroy` cho cleanup cuối: dispose unmanaged resource, remove khỏi static registry, hủy token.
+- Save game trên pause/focus loss cho mobile/web; `OnApplicationQuit` chỉ là cơ hội cuối trên platform hỗ trợ.
+- Không dựa vào thứ tự `OnDestroy` giữa nhiều object. Manager có thể đã chết trước listener.
+- Viết cleanup idempotent: gọi nhiều lần vẫn an toàn.
 
 ## Example
 ```csharp

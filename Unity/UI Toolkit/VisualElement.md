@@ -8,30 +8,27 @@ sticker: lucide//align-justify
 ---
 
 ## Core idea
-- `VisualElement` là building block cơ bản của UI Toolkit, mọi UI control đều kế thừa từ nó và tổ chức theo tree hierarchy.
+- `VisualElement` là building block cơ bản của UI Toolkit, mọi UI control đều kế thừa từ và tổ chức theo tree hierarchy.
 
 ## Key points
-- Unity `6.3`: `VisualElement` là node cơ bản trong visual tree, tương tự `div` trong HTML, có thể chứa child element và nhận style.
+- Unity `6.4`: `VisualElement` là node cơ bản trong visual tree, tương tự `div` trong HTML, có thể chứa child element và nhận style.
 - Mọi UI control như `Button`, `Label`, `TextField`, `Toggle`, `ScrollView`, `ListView`, `Slider`, `DropdownField` đều kế thừa từ `VisualElement`.
 - Visual tree là đồ thị phân cấp gồm các `VisualElement`, root element được gọi là `rootVisualElement` và truy cập qua `UIDocument`.
 - Mỗi `VisualElement` có property `style` để set inline style, `name` để query, và `classList` để gắn USS class.
 - Layout dùng hệ thống flexbox giống CSS: `flex-direction`, `justify-content`, `align-items`, `flex-grow`, `flex-shrink`.
 - Event system dùng `RegisterCallback<TEvent>()` để lắng nghe event như `ClickEvent`, `ChangeEvent<T>`, `MouseEnterEvent`.
 - Query element con bằng `Q<T>(name)` cho một element hoặc `Query<T>(className)` cho danh sách element.
-- Có thể tạo element bằng code C# hoặc khai báo trong UXML, cả hai cách đều cho kết quả tương đương.
+- có thể tạo element bằng code C# hoặc khai báo trong UXML, cả hai cách đều cho kết quả tương đương.
 
 ## Decision rules
-- Mô hình giống web development, dễ tiếp cận cho developer có kinh nghiệm HTML/CSS.
-- Flexbox layout mạnh hơn và linh hoạt hơn hệ thống anchor/pivot của UGUI.
-- Event system nhất quán cho cả Editor UI và runtime UI.
 - Dùng cho mọi UI element trong UI Toolkit, từ container layout đến control phức tạp.
 - Khi cần tạo UI element custom bằng cách kế thừa `VisualElement`.
 - Dùng query system để truy cập element từ code thay vì serialize reference.
 - Tránh nếu project vẫn dùng UGUI và không có kế hoạch migrate.
 - Không dùng cho world-space UI phức tạp, vì UI Toolkit runtime world-space support còn hạn chế so với UGUI.
-- UI Toolkit runtime vẫn đang phát triển, một số feature có trong UGUI chưa có trong UI Toolkit.
-- World-space UI support hạn chế hơn UGUI Canvas world space.
 - Không có built-in physics interaction như UGUI `GraphicRaycaster`.
+- Mô hình giống web development, dễ tiếp cận cho developer có kinh nghiệm HTML/CSS.
+- Flexbox layout mạnh hơn và linh hoạt hơn hệ thống anchor/pivot của UGUI.
 
 ## Example
 ```csharp

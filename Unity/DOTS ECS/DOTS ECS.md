@@ -6,7 +6,7 @@ tags:
 
 ## Scope
 Folder này chứa kiến thức về `DOTS ECS` trong Unity.
-Tập trung vào `Entities 1.4.2` và các tài liệu Unity `6.3` liên quan như `Job System` và `Burst Compiler`, để giải thích cách Unity tổ chức data và logic theo hướng data-oriented.
+Tập trung vào `Entities 1.4.2` và các tài liệu Unity `6.4` liên quan như `Job System` và `Burst Compiler`, để giải thích cách Unity tổ chức data và logic theo hướng data-oriented.
 
 ## Note map
 - [[Definition]]: Gốc.

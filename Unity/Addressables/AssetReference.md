@@ -21,17 +21,14 @@ sticker: lucide//align-justify
 - Gọi `assetRef.ReleaseAsset()` để giải phóng asset khi không cần nữa.
 
 ## Decision rules
-- Tách biệt reference và loading: asset không tự động load khi scene mở, giảm memory và load time.
-- Type-safe: compiler và Inspector đều kiểm tra kiểu, tránh load sai loại asset.
-- Designer-friendly: kéo thả asset vào Inspector giống direct reference nhưng với deferred loading.
 - Khi asset không cần load ngay lập tức, ví dụ prefab enemy chỉ load khi player tới vùng đó.
 - Khi muốn kiểm soát chính xác thời điểm asset vào và ra khỏi memory.
 - Dùng thay thế direct reference cho asset lớn như texture, model, audio clip.
 - Không cần cho asset nhỏ luôn cần thiết ngay từ đầu, direct reference đơn giản hơn.
 - Tránh nếu project không dùng Addressables system.
-- `LoadAssetAsync` chỉ cache một handle, gọi lại không tăng ref-count, cần dùng `Addressables.LoadAssetAsync` trực tiếp nếu cần nhiều load.
-- Phải release đúng cách, nếu quên release sẽ giữ asset và AssetBundle trong memory vĩnh viễn.
-- `AssetReference` không hỗ trợ load đồng bộ, luôn phải dùng async.
+- Tách biệt reference và loading: asset không tự động load khi scene mở, giảm memory và load time.
+- Type-safe: compiler và Inspector đều kiểm tra kiểu, tránh load sai loại asset.
+- Designer-friendly: kéo thả asset vào Inspector giống direct reference nhưng với deferred loading.
 
 ## Example
 ```csharp

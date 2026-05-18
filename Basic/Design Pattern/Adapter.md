@@ -11,7 +11,7 @@ tags:
 
 ## Key points
 - `Adapter` là structural pattern.
-- Nó rất hữu ích khi bạn cần dùng code bên thứ ba hoặc legacy code có API không khớp với hệ thống hiện tại.
+- hữu ích khi bạn cần dùng code bên thứ ba hoặc legacy code có API không khớp với hệ thống hiện tại.
 - Hệ thống của bạn định nghĩa contract mong muốn như `IPaymentGateway`.
 - Adapter implement contract đó và gọi sang API thật của class cũ hoặc thư viện ngoài.
 - Nơi sử dụng chỉ biết contract chuẩn, không cần biết chi tiết API gốc.

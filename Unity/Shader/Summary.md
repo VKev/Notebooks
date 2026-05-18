@@ -6,7 +6,7 @@ sticker: lucide//atom
 ---
 
 ## Version scope
-- `Unity 6.3 LTS (6000.3)`: Shader viết tay nên dùng `ShaderLab` để tổ chức shader và `HLSL` cho code GPU. Với URP/HDRP, ưu tiên `HLSLPROGRAM` thay vì `CGPROGRAM`.
+- `Unity 6.4 (6000.4)`: Shader viết tay nên dùng `ShaderLab` để tổ chức shader và `HLSL` cho code GPU. Với URP/HDRP, ưu tiên `HLSLPROGRAM` thay vì `CGPROGRAM`.
 
 ## Core keywords
 - `ShaderLab`: Ngôn ngữ khai báo cấu trúc shader trong Unity. Tổ chức `Shader`, `Properties`, `SubShader`, `Pass`, tag, render state, và HLSL block.
