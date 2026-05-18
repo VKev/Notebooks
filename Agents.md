@@ -62,6 +62,10 @@ When adding, updating, or deleting notes, always preserve the field > section > 
 - Feature notes should start with YAML properties using `---` at the top of the file.
 - Keep properties minimal and atomic.
 - Use `aliases` as a YAML list when alternate names help search or linking.
+- Use the flexible heading system in `Vault.md`.
+- Feature notes default to compact shape: `## Core idea`, `## Key points`, `## Decision rules`, optional `## Example`, and `## Related notes`.
+- Do not force extra headings when compact shape is enough. Split into more headings only when it improves review.
+- Prefer reusable heading names such as `## Definition`, `## Mechanics`, `## Workflow`, `## API surface`, `## Parameters`, `## Decision rules`, `## Tradeoffs`, `## Common traps`, `## Performance notes`, and `## Example`.
 - When deleting or renaming notes, update related field notes and section summaries to avoid broken links.
 
 Example:

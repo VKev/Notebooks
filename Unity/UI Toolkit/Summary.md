@@ -1,4 +1,4 @@
----
+﻿---
 note_type: summary
 tags:
   - unity
@@ -6,78 +6,39 @@ sticker: lucide//atom
 ---
 
 ## Version scope
-- `Unity 6.3`
-  UI Toolkit hỗ trợ cả Editor UI và runtime UI.
-  Đang dần thay thế UGUI cho project mới.
+- `Unity 6.3`: UI Toolkit hỗ trợ cả Editor UI và runtime UI. Đang dần thay thế UGUI cho project mới.
 
 ## Core keywords
-- `VisualElement`
-  Building block cơ bản, tương tự `div` trong HTML.
-  Mọi control đều kế thừa từ nó.
-- `UXML`
-  Markup format khai báo cấu trúc UI, giống HTML/XML.
-  Tách structure khỏi style và logic.
-- `USS`
-  Style sheet format giống CSS, hỗ trợ selector, class, pseudo-class.
-  Cho phép restyle toàn bộ UI bằng cách đổi file USS.
-- `UIDocument`
-  Component gắn lên `GameObject` để hiển thị UI tại runtime.
-  Kết nối UXML template với scene qua `PanelSettings`.
-- `UI Builder`
-  Visual editor kéo thả để tạo UXML và USS.
-  Artist có thể thiết kế UI mà không viết code.
+- `VisualElement`: Building block cơ bản, tương tự `div` trong HTML. Mọi control đều kế thừa từ nó.
+- `UXML`: Markup format khai báo cấu trúc UI, giống HTML/XML. Tách structure khỏi style và logic.
+- `USS`: Style sheet format giống CSS, hỗ trợ selector, class, pseudo-class. Cho phép restyle toàn bộ UI bằng cách đổi file USS.
+- `UIDocument`: Component gắn lên `GameObject` để hiển thị UI tại runtime. Kết nối UXML template với scene qua `PanelSettings`.
+- `UI Builder`: Visual editor kéo thả để tạo UXML và USS. Artist có thể thiết kế UI mà không viết code.
 
 ## Layout and events
-- `Flexbox`
-  Hệ thống layout giống CSS flexbox.
-  Hỗ trợ `flex-direction`, `justify-content`, `align-items`, `flex-grow`.
-- `Query system`
-  `Q<T>(name)` tìm một element, `Query<T>(className)` tìm nhiều.
-  Thay thế việc serialize reference UI element.
-- `Event system`
-  `RegisterCallback<TEvent>()` để lắng nghe event.
-  Hỗ trợ `ClickEvent`, `ChangeEvent<T>`, `MouseEnterEvent`, v.v.
+- `Flexbox`: Hệ thống layout giống CSS flexbox. Hỗ trợ `flex-direction`, `justify-content`, `align-items`, `flex-grow`.
+- `Query system`: `Q<T>(name)` tìm một element, `Query<T>(className)` tìm nhiều. Thay thế việc serialize reference UI element.
+- `Event system`: `RegisterCallback<TEvent>()` để lắng nghe event. Hỗ trợ `ClickEvent`, `ChangeEvent<T>`, `MouseEnterEvent`, v.v.
 
 ## Comparison with UGUI
-- `Canvas vs UIDocument`
-  UGUI dùng `Canvas` với `RectTransform`, UI Toolkit dùng `UIDocument` với `VisualElement`.
-  UI Toolkit layout bằng flexbox, UGUI layout bằng anchor/pivot.
-- `Separation of concerns`
-  UGUI gộp layout, style, logic trên `GameObject`.
-  UI Toolkit tách ra UXML, USS, và C# riêng biệt.
-- `World-space`
-  UGUI hỗ trợ world-space Canvas tốt hơn.
-  UI Toolkit runtime world-space còn hạn chế.
+- `Canvas vs UIDocument`: UGUI dùng `Canvas` với `RectTransform`, UI Toolkit dùng `UIDocument` với `VisualElement`. UI Toolkit layout bằng flexbox, UGUI layout bằng anchor/pivot.
+- `Separation of concerns`: UGUI gộp layout, style, logic trên `GameObject`. UI Toolkit tách ra UXML, USS, và C# riêng biệt.
+- `World-space`: UGUI hỗ trợ world-space Canvas tốt hơn. UI Toolkit runtime world-space còn hạn chế.
 
 ## Decision rules
-- `Project mới cần runtime UI`
-  Cân nhắc UI Toolkit nếu không cần world-space UI phức tạp.
-  Mô hình tách biệt UXML/USS/C# dễ maintain hơn.
-- `Cần world-space UI phức tạp`
-  Dùng UGUI Canvas world space.
-  UI Toolkit chưa hỗ trợ đầy đủ.
-- `Cần Editor tool UI`
-  Dùng UI Toolkit, đây là hướng chính thức cho Editor UI.
-  `EditorWindow` hỗ trợ UI Toolkit native.
-- `Artist cần thiết kế UI`
-  Dùng UI Builder.
-  Tách biệt design và code, tránh file conflict.
+- `Project mới cần runtime UI`: Cân nhắc UI Toolkit nếu không cần world-space UI phức tạp. Mô hình tách biệt UXML/USS/C# dễ maintain hơn.
+- `Cần world-space UI phức tạp`: Dùng UGUI Canvas world space. UI Toolkit chưa hỗ trợ đầy đủ.
+- `Cần Editor tool UI`: Dùng UI Toolkit, đây là hướng chính thức cho Editor UI. `EditorWindow` hỗ trợ UI Toolkit native.
+- `Artist cần thiết kế UI`: Dùng UI Builder. Tách biệt design và code, tránh file conflict.
 
 ## Common traps
-- `Nghĩ UI Toolkit hoàn toàn thay thế UGUI ngay`
-  Chưa đúng. World-space UI và một số feature vẫn tốt hơn ở UGUI.
-  Kiểm tra feature support trước khi quyết định.
-- `Viết tất cả UI bằng C# code`
-  Mất lợi thế tách biệt concern.
-  Dùng UXML cho structure, USS cho style, C# cho logic.
-- `Quên gán PanelSettings cho UIDocument`
-  UI không render nếu thiếu `PanelSettings`.
-  Mỗi `UIDocument` cần reference tới `PanelSettings` asset.
-- `Dùng USS property giống hệt CSS`
-  USS chỉ hỗ trợ subset của CSS, một số property khác tên.
-  Kiểm tra tài liệu USS property reference.
+- `Nghĩ UI Toolkit hoàn toàn thay thế UGUI ngay`: Chưa đúng. World-space UI và một số feature vẫn tốt hơn ở UGUI. Kiểm tra feature support trước khi quyết định.
+- `Viết tất cả UI bằng C# code`: Mất lợi thế tách biệt concern. Dùng UXML cho structure, USS cho style, C# cho logic.
+- `Quên gán PanelSettings cho UIDocument`: UI không render nếu thiếu `PanelSettings`. Mỗi `UIDocument` cần reference tới `PanelSettings` asset.
+- `Dùng USS property giống hệt CSS`: USS chỉ hỗ trợ subset của CSS, một số property khác tên. Kiểm tra tài liệu USS property reference.
 
-## Interview questions and answers
+## Review questions
+
 ### UI Toolkit khác UGUI ở điểm nào?
 - UI Toolkit tách structure (UXML), style (USS), logic (C#) giống web development, trong khi UGUI gộp tất cả trên `GameObject` với `RectTransform`.
 

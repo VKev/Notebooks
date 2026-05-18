@@ -1,4 +1,4 @@
----
+﻿---
 aliases:
   - Event Function Order
 note_type: feature
@@ -7,15 +7,13 @@ tags:
 sticker: lucide//align-justify
 ---
 
-## One-line
+## Core idea
 - `Execution Order` là thứ tự cố định mà Unity gọi các event function trên `MonoBehaviour` mỗi frame và qua các giai đoạn khác nhau.
 
-## What is it
-- Theo tài liệu Unity `6.3`, Unity chia vòng đời `MonoBehaviour` thành nhiều phase chạy theo thứ tự cố định: Initialization, Physics, Input, Game Logic, Rendering, và Decommissioning.
+## Key points
+- Unity `6.3`: Unity chia vòng đời `MonoBehaviour` thành nhiều phase chạy theo thứ tự cố định: Initialization, Physics, Input, Game Logic, Rendering, và Decommissioning.
 - Mỗi phase chứa các callback cụ thể, và thứ tự giữa các phase được đảm bảo, nhưng thứ tự giữa các script trong cùng một phase thì không, trừ khi cấu hình `Script Execution Order`.
 - Hiểu sai thứ tự là nguyên nhân phổ biến nhất gây bug khó debug trong Unity.
-
-## How it works
 - Phase 1 `Initialization`: `Awake` → `OnEnable` → `Start`, chạy một lần khi object khởi tạo.
 - Phase 2 `Physics`: `FixedUpdate` → physics simulation → `OnTriggerXXX` / `OnCollisionXXX`, chạy theo fixed timestep, có thể nhiều lần mỗi frame hoặc không lần nào.
 - Phase 3 `Game Logic`: `Update` → coroutine yield `null` → `LateUpdate`, chạy mỗi frame.
@@ -24,51 +22,33 @@ sticker: lucide//align-justify
 - Phase 6 `Decommissioning`: `OnDisable` → `OnDestroy` → `OnApplicationQuit`, chạy khi object bị tắt hoặc hủy.
 - Tất cả managed thread bị suspend trong một số phase để đảm bảo consistency.
 
-## Why use it
+## Decision rules
 - Đặt code đúng callback tránh race condition và thứ tự sai giữa các hệ thống.
 - Physics logic trong `FixedUpdate` đảm bảo kết quả ổn định bất kể frame rate.
 - Camera follow trong `LateUpdate` đảm bảo chạy sau khi object đã di chuyển trong `Update`.
-
-## When to use it
-- Luôn tham khảo execution order khi debug hành vi bất thường liên quan đến timing.
+- Luôn tham khảo execution order khi debug hành vi bất liên quan đến timing.
 - Dùng `Script Execution Order` settings khi cần một script chạy trước script khác trong cùng phase.
-
-## When to not use it
 - Không cố nhồi tất cả logic vào `Update`, phân chia đúng giữa `FixedUpdate`, `Update`, và `LateUpdate`.
 - Không dựa vào thứ tự mặc định giữa các script, vì Unity không đảm bảo thứ tự đó.
-
-## Limitations
 - Thứ tự giữa các `MonoBehaviour` trong cùng phase là không xác định trừ khi cấu hình thủ công.
 - `OnGUI` là legacy API, UI Toolkit hoặc UGUI được khuyến khích thay thế.
 - Coroutine yield point nằm xen kẽ giữa các phase, không phải lúc nào cũng trực quan.
 
----
-
-## Example code
+## Example
 ```csharp
 using UnityEngine;
-
 public class LifecycleDemo : MonoBehaviour
 {
-    // Phase 1: Initialization
     void Awake()    => Debug.Log("1. Awake");
     void OnEnable() => Debug.Log("2. OnEnable");
     void Start()    => Debug.Log("3. Start");
-
-    // Phase 2: Physics (fixed timestep)
     void FixedUpdate() => Debug.Log("4. FixedUpdate");
-
-    // Phase 3: Game Logic (mỗi frame)
     void Update()     => Debug.Log("5. Update");
     void LateUpdate() => Debug.Log("6. LateUpdate");
-
-    // Phase 6: Decommissioning
     void OnDisable() => Debug.Log("7. OnDisable");
     void OnDestroy() => Debug.Log("8. OnDestroy");
 }
 ```
-
----
 
 ## Related notes
 - [[Definition]]

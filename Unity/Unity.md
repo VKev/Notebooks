@@ -1,98 +1,23 @@
----
+﻿---
 note_type: field
 tags:
   - unity
 ---
 
-Đây là field note của folder `Unity`.
+field note của folder `Unity`.
 Nó mô tả phạm vi kiến thức Unity trong vault và định nghĩa rule viết note cho các section bên trong folder này.
-Các section hiện tại gồm những nhóm như `Addressables`, `Asynchronous`, `DOTS ECS`, `Draw Call`, `Interview`, `MonoBehaviour Lifecycle`, `Object Pooling`, `Render Pipeline`, `Scriptable Object`, `Serialization`, và `UI Toolkit`.
+Các section hiện tại gồm những nhóm như `Addressables`, `Asynchronous`, `DOTS ECS`, `Draw Call`, `MonoBehaviour Lifecycle`, `Object Pooling`, `Render Pipeline`, `Scriptable Object`, `Serialization`, `Shader`, `Texture`, và `UI Toolkit`.
 
-## Note Formats
-
-### Feature note
-````md
----
-aliases:
-  - Alternate note name
-note_type: feature
-tags:
-  - unity
----
-
-## One-line
-- ...
-
-## What is it
-- ...
-
-## How it works
-- ...
-
-## Why use it
-- ...
-
-## When to use it
-- ...
-
-## When to not use it
-- ...
-
-## Limitations
-- ...
-
----
-
-## Example code
-```csharp
-// code here
-```
-
----
-
-## Related notes
-- [[Definition]]
-- [[Summary]]
-````
-
-### Definition note
-````md
----
-note_type: definition
-tags:
-  - unity
----
-
-## What is it
-- ...
-
-## Related notes
-- [[FeatureNote]]
-- [[Summary]]
-````
-
-### Summary note
-````md
----
-note_type: summary
-tags:
-  - unity
----
-
-## Core keywords
-- `Keyword`
-  Short Vietnamese explanation.
-  Another short supporting line.
-
-## Another section
-- `Keyword`
-  Short Vietnamese explanation.
-  Another short supporting line.
-
-## Interview questions and answers
-### Câu hỏi?
-- Câu trả lời ngắn gọn.
-````
+## Format rules
+- Chi tiết format chung nằm ở [[../Vault|Vault Format System]].
+- Feature note mặc định dùng `## Core idea`, `## Key points`, `## Decision rules`, tùy chọn `## Example`, và `## Related notes`.
+- Chỉ tách thêm heading khi note cần review theo API, workflow, setting, hoặc performance riêng.
+- Với Unity API note, ưu tiên `## API surface`, `## Parameters`, `## Mechanics`, `## Example`, `## Common traps`.
+- Với Unity architecture/system note, ưu tiên `## Mechanics`, `## Workflow`, `## Decision rules`, `## Tradeoffs`.
+- Với Unity performance/rendering note, ưu tiên `## Performance notes`, `## Decision rules`, `## Common traps`.
+- Với Unity settings note, ưu tiên `## Important settings`, `## Decision rules`, `## Common traps`.
+- Definition note dùng `## Definition` và `## Related notes`.
+- Summary note được phép có heading domain-specific như `## Rendering paths`, `## Lifecycle`, `## Architecture patterns`.
 
 ## Notes
 - Folder names and file names stay in English.
