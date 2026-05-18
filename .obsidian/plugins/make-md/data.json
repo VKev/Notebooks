@@ -39,9 +39,9 @@
   "deleteFileOption": "trash",
   "expandedSpaces": [
     "/",
-    "//Tags",
+    "//Basic",
     "//Unity",
-    "//Unity/Unity/Asynchronous"
+    "//Unity/Unity/Interview"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",

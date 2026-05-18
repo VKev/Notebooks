@@ -1,0 +1,80 @@
+---
+aliases:
+  - State Pattern
+note_type: feature
+tags:
+  - basic
+---
+
+## One-line
+- `State` tách hành vi theo từng trạng thái ra thành các object riêng, giúp object đổi cách xử lý khi state bên trong thay đổi.
+
+## What is it
+- `State` là behavioral pattern.
+- Nó đặc biệt hữu ích khi object có nhiều trạng thái và mỗi trạng thái có rule xử lý khác nhau.
+
+## How it works
+- Context giữ một reference tới state hiện tại.
+- Mỗi state implement cùng một contract nhưng xử lý theo logic riêng.
+- Khi state đổi, context thay object state hiện tại thay vì dùng chuỗi `if-else` lớn.
+
+## Why use it
+- Làm code rõ hơn khi behavior phụ thuộc mạnh vào trạng thái.
+- Giảm `if-else` hoặc `switch` phình to.
+- Dễ thêm trạng thái mới mà ít ảnh hưởng trạng thái cũ.
+
+## When to use it
+- Dùng cho workflow, AI, player state, order state, hoặc UI state phức tạp.
+- Dùng khi một object đổi hành vi rõ rệt theo trạng thái hiện tại.
+
+## When to not use it
+- Không cần nếu số state ít và logic chuyển state rất đơn giản.
+- Không nên tạo state object nếu một enum và vài nhánh rõ ràng là đủ.
+
+## Limitations
+- Tăng số lượng class.
+- Nếu model state chưa ổn định, việc tách thành nhiều state object có thể hơi nặng.
+
+---
+
+## Example code
+```csharp
+public interface IOrderState
+{
+    void Handle(OrderContext context);
+}
+
+public class PendingState : IOrderState
+{
+    public void Handle(OrderContext context)
+    {
+        Console.WriteLine("Order is pending");
+        context.State = new PaidState();
+    }
+}
+
+public class PaidState : IOrderState
+{
+    public void Handle(OrderContext context)
+    {
+        Console.WriteLine("Order is paid");
+    }
+}
+
+public class OrderContext
+{
+    public IOrderState State { get; set; } = new PendingState();
+
+    public void Process()
+    {
+        State.Handle(this);
+    }
+}
+```
+
+---
+
+## Related notes
+- [[Definition]]
+- [[Strategy]]
+- [[Summary]]

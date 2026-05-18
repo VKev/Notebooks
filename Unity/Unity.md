@@ -6,6 +6,7 @@ tags:
 
 Đây là field note của folder `Unity`.
 Nó mô tả phạm vi kiến thức Unity trong vault và định nghĩa rule viết note cho các section bên trong folder này.
+Các section hiện tại gồm những nhóm như `Addressables`, `Asynchronous`, `DOTS ECS`, `Draw Call`, `Interview`, `MonoBehaviour Lifecycle`, `Object Pooling`, `Render Pipeline`, `Scriptable Object`, `Serialization`, và `UI Toolkit`.
 
 ## Note Formats
 

@@ -5,7 +5,7 @@
 
 # Local Obsidian cache
 .obsidian/cache/
-
+.claude
 # OS noise
 Thumbs.db
 Desktop.ini
